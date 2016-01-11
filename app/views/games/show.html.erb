@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @game.title %>
+</p>
+
+<p>
+  <strong>Position x:</strong>
+  <%= @game.position_x %>
+</p>
+
+<p>
+  <strong>Position y:</strong>
+  <%= @game.position_y %>
+</p>
+
+<p>
+  <strong>Position offset:</strong>
+  <%= @game.position_offset %>
+</p>
+
+<p>
+  <strong>Number of winners:</strong>
+  <%= @game.number_of_winners %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @game.status %>
+</p>
+
+<%= link_to 'Edit', edit_game_path(@game) %> |
+<%= link_to 'Back', games_path %>

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @prize_category.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @prize_category.description %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @prize_category.amount %>
+</p>
+
+<%= link_to 'Edit', edit_prize_category_path(@prize_category) %> |
+<%= link_to 'Back', prize_categories_path %>

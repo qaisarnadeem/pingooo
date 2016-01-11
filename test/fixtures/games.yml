@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  position_x: 1
+  position_y: 1
+  position_offset: 1
+  number_of_winners: 1
+  status: 1
+
+two:
+  title: MyString
+  position_x: 1
+  position_y: 1
+  position_offset: 1
+  number_of_winners: 1
+  status: 1

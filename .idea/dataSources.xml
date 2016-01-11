@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="3172383808">
+    <data-source source="LOCAL" name="Rails pingooo: development" uuid="9d4b4092-8a04-48b5-a8d7-29c6b591aad9">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://127.0.0.1/pingooo_development</jdbc-url>
+      <user-name>pingooo</user-name>
+      <user-password>dfdadfc3dfc4dfcddfc5dfc5dfc5</user-password>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails pingooo: test" uuid="8425337b-8ac2-4acb-8ad7-be86521536d5">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:pingooo_test</jdbc-url>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails pingooo: production" uuid="88566310-7c6d-49fb-a5b3-32f937225529">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:pingooo_production</jdbc-url>
+      <user-name>pingooo</user-name>
+      <user-password>df96df8fdf97df8adfefdfe4dffcdff1df8ddffadfe3dfe4dfeddfe5dfe5dfe5dff5dfeedfebdffedfebdfe8dfebdff9dfefdff5dffadfebdff9dff9dffddfe5dff8dfeedf8ddff7df8adf8fdf94</user-password>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+

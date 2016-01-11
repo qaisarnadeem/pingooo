@@ -1,0 +1,33 @@
+<%= form_for(@country_specific_prize) do |f| %>
+  <% if @country_specific_prize.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@country_specific_prize.errors.count, "error") %> prohibited this country_specific_prize from being saved:</h2>
+
+      <ul>
+      <% @country_specific_prize.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :refrences %><br>
+    <%= f.text_field :refrences %>
+  </div>
+  <div class="field">
+    <%= f.label :references %><br>
+    <%= f.text_field :references %>
+  </div>
+  <div class="field">
+    <%= f.label :amount %><br>
+    <%= f.number_field :amount %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.number_field :status %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

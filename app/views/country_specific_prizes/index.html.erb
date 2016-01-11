@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Country Specific Prizes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Refrences</th>
+      <th>References</th>
+      <th>Amount</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @country_specific_prizes.each do |country_specific_prize| %>
+      <tr>
+        <td><%= country_specific_prize.refrences %></td>
+        <td><%= country_specific_prize.references %></td>
+        <td><%= country_specific_prize.amount %></td>
+        <td><%= country_specific_prize.status %></td>
+        <td><%= link_to 'Show', country_specific_prize %></td>
+        <td><%= link_to 'Edit', edit_country_specific_prize_path(country_specific_prize) %></td>
+        <td><%= link_to 'Destroy', country_specific_prize, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Country specific prize', new_country_specific_prize_path %>

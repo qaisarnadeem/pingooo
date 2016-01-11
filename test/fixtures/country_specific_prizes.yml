@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  refrences: 
+  references: 
+  amount: 1
+  status: 1
+
+two:
+  refrences: 
+  references: 
+  amount: 1
+  status: 1

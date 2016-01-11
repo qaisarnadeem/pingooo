@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Refrences:</strong>
+  <%= @country_specific_prize.refrences %>
+</p>
+
+<p>
+  <strong>References:</strong>
+  <%= @country_specific_prize.references %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @country_specific_prize.amount %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @country_specific_prize.status %>
+</p>
+
+<%= link_to 'Edit', edit_country_specific_prize_path(@country_specific_prize) %> |
+<%= link_to 'Back', country_specific_prizes_path %>
