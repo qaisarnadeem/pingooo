@@ -69,6 +69,6 @@ class CountrySpecificPrizesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def country_specific_prize_params
-      params.require(:country_specific_prize).permit(:refrences, :references, :amount, :status)
+      params.require(:country_specific_prize).permit(:scaffold, :amount, :status, :user_id, :country_id)
     end
 end

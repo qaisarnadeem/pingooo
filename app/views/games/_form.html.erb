@@ -1,41 +1,92 @@
-<%= form_for(@game) do |f| %>
-  <% if @game.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
+<%= form_for @game, :html => { :class => "form-horizontal game",multipart: true } do |f| %>
 
-      <ul>
-      <% @game.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% if @game.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h3>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
+  <div class="form-group">
+    <%= f.label :title, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :title, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:title) %>
   </div>
-  <div class="field">
-    <%= f.label :position_x %><br>
-    <%= f.number_field :position_x %>
+  <div class="form-group">
+    <%= f.label :position_x, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :position_x, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:position_x) %>
   </div>
-  <div class="field">
-    <%= f.label :position_y %><br>
-    <%= f.number_field :position_y %>
+  <div class="form-group">
+    <%= f.label :position_y, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :position_y, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:position_y) %>
   </div>
-  <div class="field">
-    <%= f.label :position_offset %><br>
-    <%= f.number_field :position_offset %>
+  <div class="form-group">
+    <%= f.label :position_offset, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :position_offset, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:position_offset) %>
   </div>
-  <div class="field">
-    <%= f.label :number_of_winners %><br>
-    <%= f.number_field :number_of_winners %>
+  <div class="form-group">
+    <%= f.label :number_of_winner, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :number_of_winner, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:number_of_winner) %>
   </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.number_field :status %>
+
+    <div class="form-group">
+      <%= f.label :picture, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-10">
+        <%= f.file_field :picture, :class => 'form-control' %>
+      </div>
+      <%=f.error_span(:picture) %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "",'',:class=>"control-label col-lg-2"%>
+      <div class="col-lg-10">
+        <%= image_tag @game.picture.url%>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :competition_picture, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-10">
+        <%= f.file_field :competition_picture, :class => 'form-control' %>
+      </div>
+      <%=f.error_span(:competition_picture) %>
+    </div>
+
+    <div class="form-group">
+      <%=label_tag "",'',:class=>"control-label col-lg-2"%>
+      <div class="col-lg-10">
+        <%= image_tag @game.competition_picture.url%>
+      </div>
+    </div>
+  <div class="form-group">
+    <%= f.label :status, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :status,options_for_select(Game::STATUS.invert.to_a) ,{}, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:status) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                games_path, :class => 'btn btn-default' %>
+    </div>
   </div>
+
 <% end %>

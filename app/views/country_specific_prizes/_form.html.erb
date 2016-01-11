@@ -1,33 +1,56 @@
-<%= form_for(@country_specific_prize) do |f| %>
-  <% if @country_specific_prize.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@country_specific_prize.errors.count, "error") %> prohibited this country_specific_prize from being saved:</h2>
+<%= form_for @country_specific_prize, :html => { :class => "form-horizontal country_specific_prize" } do |f| %>
 
-      <ul>
-      <% @country_specific_prize.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% if @country_specific_prize.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@country_specific_prize.errors.count, "error") %> prohibited this country_specific_prize from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @country_specific_prize.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :refrences %><br>
-    <%= f.text_field :refrences %>
+  <div class="form-group">
+    <%= f.label :price_category, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :prize_category, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:scaffold) %>
   </div>
-  <div class="field">
-    <%= f.label :references %><br>
-    <%= f.text_field :references %>
+  <div class="form-group">
+    <%= f.label :amount, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :amount, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:amount) %>
   </div>
-  <div class="field">
-    <%= f.label :amount %><br>
-    <%= f.number_field :amount %>
+  <div class="form-group">
+    <%= f.label :status, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :status, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:status) %>
   </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.number_field :status %>
+
+  <div class="form-group">
+    <%= f.label :country_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :country_id, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:country_id) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                country_specific_prizes_path, :class => 'btn btn-default' %>
+    </div>
   </div>
+
 <% end %>

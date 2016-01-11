@@ -1,0 +1,42 @@
+<%- model_class = PrizeRedemption -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:game_id) %></th>
+      <th><%= model_class.human_attribute_name(:country_specific_prize_id) %></th>
+      <th><%= model_class.human_attribute_name(:status) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @prize_redemptions.each do |prize_redemption| %>
+      <tr>
+        <td><%= link_to prize_redemption.id, prize_redemption_path(prize_redemption) %></td>
+        <td><%= prize_redemption.user_id %></td>
+        <td><%= prize_redemption.game_id %></td>
+        <td><%= prize_redemption.country_specific_prize_id %></td>
+        <td><%= prize_redemption.status %></td>
+        <td><%=l prize_redemption.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_prize_redemption_path(prize_redemption), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      prize_redemption_path(prize_redemption),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_prize_redemption_path,
+            :class => 'btn btn-primary' %>

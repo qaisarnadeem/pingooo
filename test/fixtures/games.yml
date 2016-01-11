@@ -5,7 +5,7 @@ one:
   position_x: 1
   position_y: 1
   position_offset: 1
-  number_of_winners: 1
+  number_of_winner: 1
   status: 1
 
 two:
@@ -13,5 +13,5 @@ two:
   position_x: 1
   position_y: 1
   position_offset: 1
-  number_of_winners: 1
+  number_of_winner: 1
   status: 1

@@ -1,17 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  position_x: 1
+  postion_x: 1
   position_y: 1
-  references: 
-  references: 
+  game_id: 
+  user_id: 
   chance_number: 1
   is_hit: false
 
 two:
-  position_x: 1
+  postion_x: 1
   position_y: 1
-  references: 
-  references: 
+  game_id: 
+  user_id: 
   chance_number: 1
   is_hit: false

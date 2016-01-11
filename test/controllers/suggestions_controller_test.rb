@@ -18,7 +18,7 @@ class SuggestionsControllerTest < ActionController::TestCase
 
   test "should create suggestion" do
     assert_difference('Suggestion.count') do
-      post :create, suggestion: { description: @suggestion.description, references: @suggestion.references, subject: @suggestion.subject }
+      post :create, suggestion: { description: @suggestion.description, subject: @suggestion.subject, user_id: @suggestion.user_id }
     end
 
     assert_redirected_to suggestion_path(assigns(:suggestion))
@@ -35,7 +35,7 @@ class SuggestionsControllerTest < ActionController::TestCase
   end
 
   test "should update suggestion" do
-    patch :update, id: @suggestion, suggestion: { description: @suggestion.description, references: @suggestion.references, subject: @suggestion.subject }
+    patch :update, id: @suggestion, suggestion: { description: @suggestion.description, subject: @suggestion.subject, user_id: @suggestion.user_id }
     assert_redirected_to suggestion_path(assigns(:suggestion))
   end
 

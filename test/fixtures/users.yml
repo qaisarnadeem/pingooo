@@ -3,19 +3,21 @@
 one:
   nickname: MyString
   email: MyString
-  firstName: MyString
-  lastName: MyString
-  references: 
-  date_of_birth: 2016-01-10
+  first_name: MyString
+  last_name: MyString
+  country_id: 
+  date_of_birth: 2016-01-11
   diamond_count: 1
   language: MyString
+  secret_code: MyString
 
 two:
   nickname: MyString
   email: MyString
-  firstName: MyString
-  lastName: MyString
-  references: 
-  date_of_birth: 2016-01-10
+  first_name: MyString
+  last_name: MyString
+  country_id: 
+  date_of_birth: 2016-01-11
   diamond_count: 1
   language: MyString
+  secret_code: MyString
