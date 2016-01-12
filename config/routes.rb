@@ -6,7 +6,13 @@ Rails.application.routes.draw do
   resources :prize_redemptions
   resources :prize_redemptions
   resources :prize_categories
-  resources :games
+  resources :games ,:only=>[:new,:create,:update,:destroy] do
+    collection do
+      get :today_game
+      get "/:attachment/:id/:style/:filename" => "games#get_pictures"
+    end
+
+  end
   resources :gameplays
   resources :country_specific_prizes
   resources :suggestions

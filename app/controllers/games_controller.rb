@@ -1,17 +1,22 @@
 class GamesController < ApplicationController
   before_action :set_game, only: [:show, :edit, :update, :destroy]
   before_filter :authorize_apps_request
+
   # GET /games
   # GET /games.json
   def index
     @games = Game.all
   end
 
-  # GET /games/1
-  # GET /games/1.json
-  def show
+  def today_game
+      @game=Game.on_going.last
+      render :json => {:message=>"There is no on going game right now. Please come back later"} and return unless @game
   end
 
+
+  def get_pictures
+
+  end
   # GET /games/new
   def new
     @game = Game.new
@@ -28,11 +33,9 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-        format.html { redirect_to @game, notice: 'Game was successfully created.' }
-        format.json { render :show, status: :created, location: @game }
+        format.html { redirect_to games_path, notice: 'Game was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,11 +45,9 @@ class GamesController < ApplicationController
   def update
     respond_to do |format|
       if @game.update(game_params)
-        format.html { redirect_to @game, notice: 'Game was successfully updated.' }
-        format.json { render :show, status: :ok, location: @game }
+        format.html { redirect_to games_path, notice: 'Game was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @game.errors, status: :unprocessable_entity }
       end
     end
   end

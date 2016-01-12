@@ -25,7 +25,7 @@
         <td><%= game.position_y %></td>
         <td><%= game.position_offset %></td>
         <td><%= game.number_of_winner %></td>
-        <td><%= game.status %></td>
+        <td><%= Game::STATUS[game.status] %></td>
         <td><%=l game.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
