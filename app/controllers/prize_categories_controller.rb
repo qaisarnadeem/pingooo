@@ -1,6 +1,6 @@
 class PrizeCategoriesController < ApplicationController
   before_action :set_prize_category, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authorize_apps_request
   # GET /prize_categories
   # GET /prize_categories.json
   def index

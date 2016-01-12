@@ -1,6 +1,6 @@
 class PrizeRedemptionsController < ApplicationController
   before_action :set_prize_redemption, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authorize_apps_request
   # GET /prize_redemptions
   # GET /prize_redemptions.json
   def index

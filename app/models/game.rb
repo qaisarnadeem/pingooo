@@ -5,5 +5,12 @@ class Game < ActiveRecord::Base
   validates_presence_of :position_x,:position_y,:position_offset,:status
   STATUS={1=>"Upcoming",2=>"Played",3=>"On Going"}
   validates :position_x,:position_y,:position_offset,:number_of_winner, :numericality => { :greater_than => 0}
+  has_many :gameplays
+  has_many :prize_redemptions
+
+
+  def winner_gameplays
+      gameplays.order(:daviation).order(:created_at).limit(self.number_of_winner)
+  end
 
 end

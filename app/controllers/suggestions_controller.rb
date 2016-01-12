@@ -1,6 +1,6 @@
 class SuggestionsController < ApplicationController
   before_action :set_suggestion, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authorize_apps_request
   # GET /suggestions
   # GET /suggestions.json
   def index

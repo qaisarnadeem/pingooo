@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160111132434) do
+ActiveRecord::Schema.define(version: 20160112073744) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 20160111132434) do
     t.boolean  "is_hit",        default: false
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
+    t.float    "daviation"
   end
 
   add_index "gameplays", ["game_id"], name: "index_gameplays_on_game_id", using: :btree

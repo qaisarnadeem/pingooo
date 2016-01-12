@@ -1,6 +1,6 @@
 class CountrySpecificPrizesController < ApplicationController
   before_action :set_country_specific_prize, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authorize_apps_request
   # GET /country_specific_prizes
   # GET /country_specific_prizes.json
   def index

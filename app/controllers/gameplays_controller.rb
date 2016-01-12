@@ -1,6 +1,6 @@
 class GameplaysController < ApplicationController
   before_action :set_gameplay, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authorize_apps_request
   # GET /gameplays
   # GET /gameplays.json
   def index
