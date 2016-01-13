@@ -25,7 +25,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'bootstrap-sass', '~> 3.3.1'
 gem "twitter-bootstrap-rails"
-
+gem 'rails_12factor'
 gem "paperclip", "~> 4.3"
 gem "parsley-rails"
 # Use ActiveModel has_secure_password

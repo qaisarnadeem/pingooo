@@ -7,7 +7,7 @@ class MainController < ApplicationController
   def get_prize_categories
     prize_categories=PrizeCategory.all
     prize_categories=PrizeCategory.joins(:country_specific_prizes).where(:country_specific_prizes=>{:country_id=>params[:country_id]}) if params[:country_id]
-    render :json =>  {:total_count=>prize_categories.length, :prize_categories=>prize_categories.map{|p_c| {:name=>p_c.title,:id=>p_c.id}}}
+    render :json =>  {:total_count=>prize_categories.length, :prize_categories=>prize_categories.map{|p_c| {:name=>p_c.title,:id=>p_c.id,:icon=>{:medium=>p_c.icon.url(:medium),:original=>p_c.icon.url}}}}
   end
 
 end
