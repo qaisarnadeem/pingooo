@@ -28,11 +28,9 @@ class CountrySpecificPrizesController < ApplicationController
 
     respond_to do |format|
       if @country_specific_prize.save
-        format.html { redirect_to @country_specific_prize, notice: 'Country specific prize was successfully created.' }
-        format.json { render :show, status: :created, location: @country_specific_prize }
+        format.html { redirect_to country_specific_prizes_path, notice: 'Country specific prize was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @country_specific_prize.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,11 +40,9 @@ class CountrySpecificPrizesController < ApplicationController
   def update
     respond_to do |format|
       if @country_specific_prize.update(country_specific_prize_params)
-        format.html { redirect_to @country_specific_prize, notice: 'Country specific prize was successfully updated.' }
-        format.json { render :show, status: :ok, location: @country_specific_prize }
+        format.html { redirect_to country_specific_prizes_path, notice: 'Country specific prize was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @country_specific_prize.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -69,6 +65,6 @@ class CountrySpecificPrizesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def country_specific_prize_params
-      params.require(:country_specific_prize).permit(:scaffold, :amount, :status, :user_id, :country_id)
+      params.require(:country_specific_prize).permit(:amount, :status, :user_id, :country_id,:prize_category_id)
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160112181540) do
+ActiveRecord::Schema.define(version: 20160113132808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -84,10 +84,12 @@ ActiveRecord::Schema.define(version: 20160112181540) do
     t.integer  "status"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "prize_category_id"
   end
 
   add_index "prize_redemptions", ["country_specific_prize_id"], name: "index_prize_redemptions_on_country_specific_prize_id", using: :btree
   add_index "prize_redemptions", ["game_id"], name: "index_prize_redemptions_on_game_id", using: :btree
+  add_index "prize_redemptions", ["prize_category_id"], name: "index_prize_redemptions_on_prize_category_id", using: :btree
   add_index "prize_redemptions", ["user_id"], name: "index_prize_redemptions_on_user_id", using: :btree
 
   create_table "suggestions", force: :cascade do |t|
@@ -122,6 +124,7 @@ ActiveRecord::Schema.define(version: 20160112181540) do
   add_foreign_key "gameplays", "users"
   add_foreign_key "prize_redemptions", "country_specific_prizes"
   add_foreign_key "prize_redemptions", "games"
+  add_foreign_key "prize_redemptions", "prize_categories"
   add_foreign_key "prize_redemptions", "users"
   add_foreign_key "suggestions", "users"
   add_foreign_key "users", "countries"

@@ -7,8 +7,11 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:user_id) %></th>
+      <th><%= model_class.human_attribute_name(:user_country) %></th>
       <th><%= model_class.human_attribute_name(:game_id) %></th>
+      <th><%= model_class.human_attribute_name(:prize_category_type) %></th>
       <th><%= model_class.human_attribute_name(:country_specific_prize_id) %></th>
+      <th><%= model_class.human_attribute_name(:category_prize) %></th>
       <th><%= model_class.human_attribute_name(:status) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -18,10 +21,13 @@
     <% @prize_redemptions.each do |prize_redemption| %>
       <tr>
         <td><%= link_to prize_redemption.id, prize_redemption_path(prize_redemption) %></td>
-        <td><%= prize_redemption.user_id %></td>
-        <td><%= prize_redemption.game_id %></td>
-        <td><%= prize_redemption.country_specific_prize_id %></td>
-        <td><%= prize_redemption.status %></td>
+        <td><%= prize_redemption.user.email || user.id %></td>
+        <td><%= prize_redemption.user.country.try(:name) || Country::ALL_COUNTRY %></td>
+        <td><%= prize_redemption.game.title %></td>
+        <td><%= prize_redemption.prize_category.title %></td>
+        <td><%= prize_redemption.country_specific_prize.amount %></td>
+        <td><%= prize_redemption.prize_category.amount %></td>
+        <td><%= PrizeRedemption::STATUS[prize_redemption.status] %></td>
         <td><%=l prize_redemption.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

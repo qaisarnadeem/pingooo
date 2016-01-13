@@ -14,11 +14,6 @@ class GameplaysController < ApplicationController
   def show
   end
 
-  # GET /gameplays/new
-  def new
-    @gameplay = Gameplay.new
-  end
-
   # GET /gameplays/1/edit
   def edit
   end

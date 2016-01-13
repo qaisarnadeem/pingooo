@@ -23,8 +23,8 @@
         <td><%= link_to gameplay.id, gameplay_path(gameplay) %></td>
         <td><%= gameplay.position_x %></td>
         <td><%= gameplay.position_y %></td>
-        <td><%= gameplay.game_id %></td>
-        <td><%= gameplay.user_id %></td>
+        <td><%= gameplay.game.title || gameplay.id %></td>
+        <td><%= gameplay.user.try(:email) || gameplay.user.id%></td>
         <td><%= gameplay.chance_number %></td>
         <td><%= gameplay.daviation %></td>
         <td><%= gameplay.is_hit %></td>
@@ -42,7 +42,3 @@
     <% end %>
   </tbody>
 </table>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_gameplay_path,
-            :class => 'btn btn-primary' %>

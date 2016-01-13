@@ -16,14 +16,12 @@
   <tbody>
     <% @suggestions.each do |suggestion| %>
       <tr>
-        <td><%= link_to suggestion.id, suggestion_path(suggestion) %></td>
+        <td><%= suggestion.id%></td>
         <td><%= suggestion.user_id %></td>
         <td><%= suggestion.subject %></td>
         <td><%= suggestion.description %></td>
         <td><%=l suggestion.created_at %></td>
         <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_suggestion_path(suggestion), :class => 'btn btn-default btn-xs' %>
           <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
                       suggestion_path(suggestion),
                       :method => :delete,
@@ -34,7 +32,3 @@
     <% end %>
   </tbody>
 </table>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_suggestion_path,
-            :class => 'btn btn-primary' %>

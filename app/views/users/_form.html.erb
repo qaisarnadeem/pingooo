@@ -46,7 +46,7 @@
   <div class="form-group">
     <%= f.label :country_id, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.select :country_id, options_for_countries(@user.country),{} ,:class => 'form-control' %>
+      <%= f.select :country_id, options_for_countries(@user.country_id),{} ,:class => 'form-control' %>
     </div>
     <%=f.error_span(:country_id) %>
   </div>
@@ -60,7 +60,7 @@
   <div class="form-group">
     <%= f.label :language, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :language, :class => 'form-control' %>
+      <%= f.select :language,options_for_languages(@user.language),{}, :class => 'form-control' %>
     </div>
     <%=f.error_span(:language) %>
   </div>

@@ -28,11 +28,9 @@ class PrizeCategoriesController < ApplicationController
 
     respond_to do |format|
       if @prize_category.save
-        format.html { redirect_to @prize_category, notice: 'Prize category was successfully created.' }
-        format.json { render :show, status: :created, location: @prize_category }
+        format.html { redirect_to prize_categories_path, notice: 'Prize category was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @prize_category.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -42,11 +40,9 @@ class PrizeCategoriesController < ApplicationController
   def update
     respond_to do |format|
       if @prize_category.update(prize_category_params)
-        format.html { redirect_to @prize_category, notice: 'Prize category was successfully updated.' }
-        format.json { render :show, status: :ok, location: @prize_category }
+        format.html { redirect_to prize_categories_path, notice: 'Prize category was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @prize_category.errors, status: :unprocessable_entity }
       end
     end
   end

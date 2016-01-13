@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   rescue_from ActiveRecord::RecordNotFound, :with => :render_404
   before_filter :prepend_json_views
   before_action :set_layout
+  before_action :authorize_apps
   #layout :set_layout
   protected
 
@@ -30,6 +31,12 @@ class ApplicationController < ActionController::Base
        render 'main/404' ,:status=>401 and return  if params[:app_secret].to_s != User::APP_SECRET || user.blank?
        session[:app_user_id]= user.try(:id)
      end
+  end
+
+  def authorize_apps
+    if request_json?
+      render 'main/404' ,:status=>401 and return  if params[:app_secret].to_s != User::APP_SECRET
+    end
   end
 
   def require_app_login?

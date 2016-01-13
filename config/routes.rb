@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'main/get_all_countries'
+  get 'main/get_prize_categories'
 
   resources :users ,:only=>[:create,:update]
   resources :suggestions

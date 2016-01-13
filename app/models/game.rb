@@ -17,7 +17,7 @@ class Game < ActiveRecord::Base
   scope :on_going ,->{where(:status => 3)}
 
   def winner_gameplays
-      gameplays.order(:daviation).order(:created_at).limit(self.number_of_winner)
+     played? ? self.gameplays.order(:daviation).order(:created_at).limit(self.number_of_winner) : Gameplay.none
   end
 
   def upcoming?

@@ -25,14 +25,14 @@ class PrizeRedemptionsController < ApplicationController
   # POST /prize_redemptions.json
   def create
     @prize_redemption = PrizeRedemption.new(prize_redemption_params)
-
+    @prize_redemption.user_id=current_app_user.id if request_json?
     respond_to do |format|
       if @prize_redemption.save
-        format.html { redirect_to @prize_redemption, notice: 'Prize redemption was successfully created.' }
-        format.json { render :show, status: :created, location: @prize_redemption }
+        format.html { redirect_to prize_redemptions_path, notice: 'Prize redemption was successfully created.' }
+        format.json { render :json=>{:message=>"Prize redemption was successfully created.",:responce=>"SUCCESS"}, status: :created, location: @prize_redemption }
       else
         format.html { render :new }
-        format.json { render json: @prize_redemption.errors, status: :unprocessable_entity }
+        format.json { render json: {:message=>@prize_redemption.errors,:responce=>"ERROR"}, status: :unprocessable_entity }
       end
     end
   end
@@ -69,6 +69,6 @@ class PrizeRedemptionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def prize_redemption_params
-      params.require(:prize_redemption).permit(:user_id, :game_id, :country_specific_prize_id, :status)
+      params.require(:prize_redemption).permit(:user_id, :game_id, :status,:prize_category_id)
     end
 end

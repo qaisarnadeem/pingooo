@@ -1,5 +1,5 @@
 class SuggestionsController < ApplicationController
-  before_action :set_suggestion, only: [:show, :edit, :update, :destroy]
+  before_action :set_suggestion, only: [:show, :update, :destroy]
   before_filter :authorize_apps_request
   # GET /suggestions
   # GET /suggestions.json
@@ -7,49 +7,25 @@ class SuggestionsController < ApplicationController
     @suggestions = Suggestion.all
   end
 
-  # GET /suggestions/1
-  # GET /suggestions/1.json
-  def show
-  end
 
-  # GET /suggestions/new
-  def new
-    @suggestion = Suggestion.new
-  end
-
-  # GET /suggestions/1/edit
-  def edit
-  end
 
   # POST /suggestions
   # POST /suggestions.json
   def create
     @suggestion = Suggestion.new(suggestion_params)
+    @suggestion.user=current_app_user
 
     respond_to do |format|
       if @suggestion.save
-        format.html { redirect_to @suggestion, notice: 'Suggestion was successfully created.' }
-        format.json { render :show, status: :created, location: @suggestion }
+        format.html { redirect_to suggestions_path, notice: 'Suggestion was successfully created.' }
+        format.json { render json: {:message=>'Suggestion was successfully created.',:responce=>"SUCCESS"}, status: :created}
       else
         format.html { render :new }
-        format.json { render json: @suggestion.errors, status: :unprocessable_entity }
+        format.json { render json: {:message=>@suggestion.errors,:responce=>"ERROR"}, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /suggestions/1
-  # PATCH/PUT /suggestions/1.json
-  def update
-    respond_to do |format|
-      if @suggestion.update(suggestion_params)
-        format.html { redirect_to @suggestion, notice: 'Suggestion was successfully updated.' }
-        format.json { render :show, status: :ok, location: @suggestion }
-      else
-        format.html { render :edit }
-        format.json { render json: @suggestion.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   # DELETE /suggestions/1
   # DELETE /suggestions/1.json
@@ -69,6 +45,6 @@ class SuggestionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def suggestion_params
-      params.require(:suggestion).permit(:user_id, :subject, :description)
+      params.require(:suggestion).permit(:subject, :description)
     end
 end
