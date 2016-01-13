@@ -76,7 +76,7 @@
   <div class="form-group">
     <%= f.label :status, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.select :status,options_for_select(Game::STATUS.invert.to_a) ,{}, :class => 'form-control' %>
+      <%= f.select :status,options_for_select(Game::STATUS.invert.to_a,@game.status) ,{}, :class => 'form-control' %>
     </div>
     <%=f.error_span(:status) %>
   </div>

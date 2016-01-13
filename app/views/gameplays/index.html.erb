@@ -6,11 +6,12 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:postion_x) %></th>
+      <th><%= model_class.human_attribute_name(:position_x) %></th>
       <th><%= model_class.human_attribute_name(:position_y) %></th>
       <th><%= model_class.human_attribute_name(:game_id) %></th>
       <th><%= model_class.human_attribute_name(:user_id) %></th>
       <th><%= model_class.human_attribute_name(:chance_number) %></th>
+      <th><%= model_class.human_attribute_name(:daviation) %></th>
       <th><%= model_class.human_attribute_name(:is_hit) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -20,11 +21,12 @@
     <% @gameplays.each do |gameplay| %>
       <tr>
         <td><%= link_to gameplay.id, gameplay_path(gameplay) %></td>
-        <td><%= gameplay.postion_x %></td>
+        <td><%= gameplay.position_x %></td>
         <td><%= gameplay.position_y %></td>
         <td><%= gameplay.game_id %></td>
         <td><%= gameplay.user_id %></td>
         <td><%= gameplay.chance_number %></td>
+        <td><%= gameplay.daviation %></td>
         <td><%= gameplay.is_hit %></td>
         <td><%=l gameplay.created_at %></td>
         <td>

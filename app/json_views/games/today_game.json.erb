@@ -1,4 +1,4 @@
 <%picture={
 :original=> @game.picture.url,:medium=>@game.picture.url(:medium),:thumb=>@game.picture.url(:thumb)
 }%>
-<%=raw({:game_picture=>picture}.to_json)%>
+<%=raw({:game_id=>@game.id,:game_picture=>picture}.to_json)%>

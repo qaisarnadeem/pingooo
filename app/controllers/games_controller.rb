@@ -1,6 +1,7 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :set_game, only: [:show, :edit, :update, :destroy,:get_pictures]
   before_filter :authorize_apps_request
+  before_action :authorize_pictures ,:only => [:get_pictures]
 
   # GET /games
   # GET /games.json
@@ -15,8 +16,10 @@ class GamesController < ApplicationController
 
 
   def get_pictures
-
+    picture= params[:attachment] =~ /competition_pictures/i  ? @game.competition_picture : @game.picture
+    send_file picture.path, :type => picture.content_type
   end
+
   # GET /games/new
   def new
     @game = Game.new
@@ -70,6 +73,12 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.require(:game).permit(:title, :position_x, :position_y, :position_offset, :number_of_winner, :status,:picture)
+      params.require(:game).permit(:title, :position_x, :position_y, :position_offset, :number_of_winner, :status,:picture,:competition_picture)
+    end
+
+    def authorize_pictures
+      return if admin_user?
+      render_404 unless ["pictures","competition_pictures"].include?(params[:attachment])
+      render_404 if @game.upcoming? || (@game.ongoing? && params[:attachment] != 'pictures')
     end
 end

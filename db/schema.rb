@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160112073744) do
+ActiveRecord::Schema.define(version: 20160112181540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20160112073744) do
   add_index "country_specific_prizes", ["prize_category_id"], name: "index_country_specific_prizes_on_prize_category_id", using: :btree
 
   create_table "gameplays", force: :cascade do |t|
-    t.integer  "postion_x"
+    t.integer  "position_x"
     t.integer  "position_y"
     t.integer  "game_id"
     t.integer  "user_id"

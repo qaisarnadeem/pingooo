@@ -1,6 +1,8 @@
 class GameplaysController < ApplicationController
   before_action :set_gameplay, only: [:show, :edit, :update, :destroy]
   before_filter :authorize_apps_request
+  skip_before_action :verify_authenticity_token
+  #before_action :require_app_login?
   # GET /gameplays
   # GET /gameplays.json
   def index
@@ -25,14 +27,16 @@ class GameplaysController < ApplicationController
   # POST /gameplays.json
   def create
     @gameplay = Gameplay.new(gameplay_params)
-
+    @gameplay.user_id=current_app_user.id
+    @game=Game.find(params[:gameplay][:game_id])
+    render :json => {:message=>"We could not find any ongoing game with provided ID",:responce=>"ERROR"} and return unless @game && @game.ongoing?
+    gameplays_sofar=@game.gameplays.where(:user_id=>current_app_user.id).count
+    render :json=> {:message=>"You have already exhausted all of your available chances",:responce=>"ERROR"} and return if gameplays_sofar >= Game::MAXIMUM_TURNS_ALLOWED
     respond_to do |format|
       if @gameplay.save
-        format.html { redirect_to @gameplay, notice: 'Gameplay was successfully created.' }
-        format.json { render :show, status: :created, location: @gameplay }
+        format.json { render json: {:message=>"Gameplay successfully added",:responce=>"SUCCESS"}, status: :created, location: @gameplay }
       else
-        format.html { render :new }
-        format.json { render json: @gameplay.errors, status: :unprocessable_entity }
+        format.json { render json: {:message=>@gameplay.errors,:responce=>"ERROR"}, status: :unprocessable_entity }
       end
     end
   end
@@ -69,6 +73,6 @@ class GameplaysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def gameplay_params
-      params.require(:gameplay).permit(:postion_x, :position_y, :game_id, :user_id, :chance_number, :is_hit)
+      params.require(:gameplay).permit(:position_x, :position_y, :game_id, :chance_number)
     end
 end
