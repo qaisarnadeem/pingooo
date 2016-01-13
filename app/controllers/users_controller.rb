@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :destroy]
   skip_before_action :verify_authenticity_token
   before_filter :authorize_apps_request ,:except => [:create]
   # GET /users
@@ -40,6 +40,9 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
+    @user=User.find_by_id(params[:id])
+    @user=User.find_by_secret_code(params[:id]) unless @user
+      
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to users_path, notice: 'User was successfully updated.' }
