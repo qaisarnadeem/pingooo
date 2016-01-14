@@ -1,0 +1,40 @@
+<%- model_class = GamePicture -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:is_used) %></th>
+      <th><%= model_class.human_attribute_name(:picture) %></th>
+      <th><%= model_class.human_attribute_name(:competition_picture) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @game_pictures.each do |game_picture| %>
+      <tr>
+        <td><%= game_picture.id%></td>
+        <td><%= game_picture.is_used ? "YES" : "NO"%></td>
+        <td>  <%= image_tag game_picture.picture.url,:style => "max-height:300px;"%></td>
+        <td>  <%= image_tag game_picture.competition_picture.url,:style => "max-height:300px;"%></td>
+        <td><%=l game_picture.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_game_picture_path(game_picture), :class => 'btn btn-default btn-xs' unless game_picture.is_used?%>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      game_picture_path(game_picture),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' unless game_picture.is_used?%>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_game_picture_path,
+            :class => 'btn btn-primary' %>

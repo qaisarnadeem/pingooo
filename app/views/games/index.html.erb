@@ -19,7 +19,7 @@
   <tbody>
     <% @games.each do |game| %>
       <tr>
-        <td><%= link_to game.id, game_path(game) %></td>
+        <td><%= game.id %></td>
         <td><%= game.title %></td>
         <td><%= game.position_x %></td>
         <td><%= game.position_y %></td>

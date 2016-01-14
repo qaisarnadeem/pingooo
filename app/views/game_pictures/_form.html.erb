@@ -1,0 +1,56 @@
+<%= form_for @game_picture, :html => { :class => "form-horizontal game_picture" ,:multipart=>true} do |f| %>
+
+  <% if @game_picture.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@game_picture.errors.count, "error") %> prohibited this game_picture from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @game_picture.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= f.label :picture, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.file_field :picture, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:picture) %>
+  </div>
+
+    <div class="form-group">
+      <%=label_tag "Image 1",'',:class=>"control-label col-lg-2"%>
+      <div class="col-lg-10">
+        <%= image_tag @game_picture.picture.url,:style => "max-height:300px;"%>
+      </div>
+    </div>
+
+  <div class="form-group">
+    <%= f.label :competition_picture, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.file_field :competition_picture, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:competition_picture) %>
+  </div>
+
+    <div class="form-group">
+      <%=label_tag "Image 2",'',:class=>"control-label col-lg-2"%>
+      <div class="col-lg-10">
+        <%= image_tag @game_picture.competition_picture.url,:style => "max-height:300px;"%>
+      </div>
+    </div>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                game_pictures_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+
+<% end %>

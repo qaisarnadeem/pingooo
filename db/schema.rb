@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160114085929) do
+ActiveRecord::Schema.define(version: 20160114140956) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,23 @@ ActiveRecord::Schema.define(version: 20160114085929) do
 
   add_index "country_specific_prizes", ["country_id"], name: "index_country_specific_prizes_on_country_id", using: :btree
   add_index "country_specific_prizes", ["prize_category_id"], name: "index_country_specific_prizes_on_prize_category_id", using: :btree
+
+  create_table "game_pictures", force: :cascade do |t|
+    t.boolean  "is_used",                          default: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+    t.string   "picture_file_name"
+    t.string   "picture_content_type"
+    t.integer  "picture_file_size"
+    t.datetime "picture_updated_at"
+    t.string   "competition_picture_file_name"
+    t.string   "competition_picture_content_type"
+    t.integer  "competition_picture_file_size"
+    t.datetime "competition_picture_updated_at"
+    t.integer  "game_id"
+  end
+
+  add_index "game_pictures", ["game_id"], name: "index_game_pictures_on_game_id", using: :btree
 
   create_table "gameplays", force: :cascade do |t|
     t.integer  "position_x"
@@ -142,6 +159,7 @@ ActiveRecord::Schema.define(version: 20160114085929) do
 
   add_foreign_key "country_specific_prizes", "countries"
   add_foreign_key "country_specific_prizes", "prize_categories"
+  add_foreign_key "game_pictures", "games"
   add_foreign_key "gameplays", "games"
   add_foreign_key "gameplays", "users"
   add_foreign_key "prize_redemptions", "country_specific_prizes"

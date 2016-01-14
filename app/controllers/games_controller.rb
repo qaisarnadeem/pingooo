@@ -1,5 +1,6 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy,:get_pictures]
+  before_action :set_game, only: [:show, :edit, :update, :destroy]
+  before_action :set_game_from_game_picture ,:only => [:get_pictures]
   before_filter :authorize_apps_request
   before_action :authorize_pictures ,:only => [:get_pictures]
 
@@ -16,7 +17,7 @@ class GamesController < ApplicationController
 
 
   def get_pictures
-    picture= params[:attachment] =~ /competition_pictures/i  ? @game.competition_picture : @game.picture
+    picture= params[:attachment] =~ /competition_pictures/i  ? @game_picture.competition_picture : @game_picture.picture
     send_file picture.path, :type => picture.content_type
   end
 
@@ -78,7 +79,14 @@ class GamesController < ApplicationController
 
     def authorize_pictures
       return if admin_user?
+      render_404 unless @game
       render_404 unless ["pictures","competition_pictures"].include?(params[:attachment])
       render_404 if @game.upcoming? || (@game.ongoing? && params[:attachment] != 'pictures')
     end
+
+  def set_game_from_game_picture
+      @game_picture=GamePicture.find(params[:id])
+      @game=@game_picture.game
+  end
+
 end

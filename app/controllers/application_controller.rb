@@ -6,12 +6,16 @@ class ApplicationController < ActionController::Base
   before_filter :prepend_json_views
   before_action :set_layout
   before_action :authorize_apps
-  before_action :authenticate_admin_user! ,:unless => 'request_json?'
+  before_action :authenticate_admin_user! ,:unless => 'skip_admin_check'
   #layout :set_layout
   protected
 
   def render_404
   render 'main/404' ,:formats=> nil and return
+  end
+
+  def skip_admin_check
+     request_json? || (params[:action] =~/get_pictures/i && params[:controller] =~/games/i)
   end
 
   def request_json?

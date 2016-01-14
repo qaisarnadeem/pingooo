@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  is_used: false
+  picture: MyString
+  competition_picture: MyString
+
+two:
+  is_used: false
+  picture: MyString
+  competition_picture: MyString

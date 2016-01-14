@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
+  resources :game_pictures
   get 'main/get_all_countries'
   get 'main/get_prize_categories'
-
+  get "game_pictures/:attachment/:id/:style/:filename" => "games#get_pictures"
   resources :users ,:only=>[:create,:update]
   resources :suggestions
   resources :prize_redemptions
@@ -10,7 +11,6 @@ Rails.application.routes.draw do
   resources :games ,:only=>[:new,:create,:update,:destroy] do
     collection do
       get :today_game
-      get "/:attachment/:id/:style/:filename" => "games#get_pictures"
     end
 
   end
@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   resources :games
   resources :users
   Rails.application.routes.draw do
+  resources :game_pictures
     devise_for :admin_users, controllers: {
         sessions: 'admin_users/sessions',
         registrations: 'admin_users/registrations',
