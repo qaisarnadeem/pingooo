@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :prepend_json_views
   before_action :set_layout
   before_action :authorize_apps
+  before_action :authenticate_admin_user! ,:unless => 'request_json?'
   #layout :set_layout
   protected
 
@@ -48,7 +49,12 @@ class ApplicationController < ActionController::Base
   end
 
   def admin_user?
-    true
+    current_admin_user
   end
 
+
+  # Overwriting the sign_out redirect path method
+  def after_sign_out_path_for(resource_or_scope)
+    new_session_path(:admin_user)
+  end
 end

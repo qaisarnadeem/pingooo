@@ -22,6 +22,14 @@ Rails.application.routes.draw do
   resources :prize_categories
   resources :games
   resources :users
+  Rails.application.routes.draw do
+    devise_for :admin_users, controllers: {
+        sessions: 'admin_users/sessions',
+        registrations: 'admin_users/registrations',
+        passwords: 'admin_users/passwords'
+    }
+  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
