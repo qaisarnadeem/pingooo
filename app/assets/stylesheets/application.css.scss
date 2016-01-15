@@ -1,5 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "chosen/chosen.css";
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -15,5 +16,8 @@
  *= require_tree .
  *= require_self
  */
+.control-label.disabled{
+  color:#716868;
+}
 
 

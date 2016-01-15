@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160114140956) do
+ActiveRecord::Schema.define(version: 20160115121608) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -104,6 +104,13 @@ ActiveRecord::Schema.define(version: 20160114140956) do
     t.datetime "competition_picture_updated_at"
   end
 
+  create_table "pingoo_configurations", force: :cascade do |t|
+    t.string   "configuration_id"
+    t.string   "value"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
   create_table "prize_categories", force: :cascade do |t|
     t.string   "title"
     t.string   "description"
@@ -130,6 +137,16 @@ ActiveRecord::Schema.define(version: 20160114140956) do
   add_index "prize_redemptions", ["game_id"], name: "index_prize_redemptions_on_game_id", using: :btree
   add_index "prize_redemptions", ["prize_category_id"], name: "index_prize_redemptions_on_prize_category_id", using: :btree
   add_index "prize_redemptions", ["user_id"], name: "index_prize_redemptions_on_user_id", using: :btree
+
+  create_table "prizes_countries", force: :cascade do |t|
+    t.integer  "prize_category_id"
+    t.integer  "country_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  add_index "prizes_countries", ["country_id"], name: "index_prizes_countries_on_country_id", using: :btree
+  add_index "prizes_countries", ["prize_category_id"], name: "index_prizes_countries_on_prize_category_id", using: :btree
 
   create_table "suggestions", force: :cascade do |t|
     t.integer  "user_id"
@@ -166,6 +183,8 @@ ActiveRecord::Schema.define(version: 20160114140956) do
   add_foreign_key "prize_redemptions", "games"
   add_foreign_key "prize_redemptions", "prize_categories"
   add_foreign_key "prize_redemptions", "users"
+  add_foreign_key "prizes_countries", "countries"
+  add_foreign_key "prizes_countries", "prize_categories"
   add_foreign_key "suggestions", "users"
   add_foreign_key "users", "countries"
 end

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :pingoo_configurations ,:path => 'configurations'
   resources :game_pictures
   get 'main/get_all_countries'
   get 'main/get_prize_categories'
@@ -23,6 +24,7 @@ Rails.application.routes.draw do
   resources :games
   resources :users
   Rails.application.routes.draw do
+  resources :pingoo_configurations
   resources :game_pictures
     devise_for :admin_users, controllers: {
         sessions: 'admin_users/sessions',

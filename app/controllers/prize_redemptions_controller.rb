@@ -43,7 +43,7 @@ class PrizeRedemptionsController < ApplicationController
   def update
     respond_to do |format|
       if @prize_redemption.update(prize_redemption_params)
-        format.html { redirect_to @prize_redemption, notice: 'Prize redemption was successfully updated.' }
+        format.html { redirect_to prize_redemptions_path, notice: 'Prize redemption was successfully updated.' }
         format.json { render :show, status: :ok, location: @prize_redemption }
       else
         format.html { render :edit }

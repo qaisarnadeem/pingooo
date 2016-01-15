@@ -7,11 +7,6 @@ class PrizeCategoriesController < ApplicationController
     @prize_categories = PrizeCategory.all
   end
 
-  # GET /prize_categories/1
-  # GET /prize_categories/1.json
-  def show
-  end
-
   # GET /prize_categories/new
   def new
     @prize_category = PrizeCategory.new
@@ -27,7 +22,11 @@ class PrizeCategoriesController < ApplicationController
     @prize_category = PrizeCategory.new(prize_category_params)
 
     respond_to do |format|
-      if @prize_category.save
+
+     if PrizeCategory.transaction do
+        @prize_category.save
+        @prize_category.set_countries_for_prizes params[:countries_ids]
+      end
         format.html { redirect_to prize_categories_path, notice: 'Prize category was successfully created.' }
       else
         format.html { render :new }
@@ -39,7 +38,10 @@ class PrizeCategoriesController < ApplicationController
   # PATCH/PUT /prize_categories/1.json
   def update
     respond_to do |format|
-      if @prize_category.update(prize_category_params)
+      if PrizeCategory.transaction do
+        @prize_category.update(prize_category_params)
+        @prize_category.set_countries_for_prizes params[:countries_ids]
+      end
         format.html { redirect_to prize_categories_path, notice: 'Prize category was successfully updated.' }
       else
         format.html { render :edit }

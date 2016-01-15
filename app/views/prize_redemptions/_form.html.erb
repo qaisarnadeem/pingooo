@@ -18,7 +18,7 @@
   <div class="form-group">
     <%= f.label :user_id, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.select :user_id,options_for_users(@prize_redemption.user_id),{:prompt=>"Choose User"}, :class => 'form-control' %>
+      <%= f.select :user_id,options_for_users(@prize_redemption.user_id),{:prompt=>"Choose User"}, {:class => 'form-control'}.merge(@prize_redemption.new_record? ? {} : {:disabled=>''} ) %>
     </div>
     <%=f.error_span(:user_id) %>
   </div>

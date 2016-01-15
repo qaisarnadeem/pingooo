@@ -9,6 +9,7 @@ class Game < ActiveRecord::Base
   MAXIMUM_TURNS_ALLOWED=4
   scope :on_going ,->{where(:status => 3)}
   after_save :set_picture
+  before_save :set_winners_count
   def winner_gameplays
      played? ? self.gameplays.order(:daviation).order(:created_at).limit(self.number_of_winner) : Gameplay.none
   end
@@ -41,6 +42,10 @@ class Game < ActiveRecord::Base
 
   def competition_picture
     game_picture.try(:competition_picture) || GamePicture.new.competition_picture
+  end
+
+  def set_winners_count
+    self.number_of_winner=PingooConfiguration.number_of_winners if self.number_of_winner.to_i <=0 && PingooConfiguration.number_of_winners > 0
   end
 
 end

@@ -20,7 +20,7 @@ class CountrySpecificPrize < ActiveRecord::Base
   def self.find_or_add_all_country_prize_for prize_category_id
     prize_category=PrizeCategory.find(prize_category_id)
     c_prize_category=prize_category.country_specific_prizes.where(:country_id=>Country.dummy_all_country.id).first
-    c_prize_category=CountrySpecificPrize.create(:prize_category_id=>prize_category.id,:country_id=>Country.dummy_all_country.id,:amount=>prize_category.amount) unless c_prize_category
+    #c_prize_category=CountrySpecificPrize.create(:prize_category_id=>prize_category.id,:country_id=>Country.dummy_all_country.id,:amount=>prize_category.amount) unless c_prize_category
     c_prize_category
   end
 

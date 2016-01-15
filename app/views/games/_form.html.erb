@@ -37,9 +37,9 @@
     <%=f.error_span(:position_offset) %>
   </div>
   <div class="form-group">
-    <%= f.label :number_of_winner, :class => 'control-label col-lg-2' %>
+    <%= f.label :number_of_winner, :class => 'control-label col-lg-2 disabled' %>
     <div class="col-lg-10">
-      <%= f.text_field :number_of_winner, :class => 'form-control' %>
+      <%= f.text_field :number_of_winner, :class => 'form-control',:disabled=>'disabled'%>
     </div>
     <%=f.error_span(:number_of_winner) %>
   </div>

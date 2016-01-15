@@ -42,7 +42,6 @@ class UsersController < ApplicationController
   def update
     @user=User.find_by_id(params[:id])
     @user=User.find_by_secret_code(params[:id]) unless @user
-      
     respond_to do |format|
       if @user.update(user_params)
         format.html { redirect_to users_path, notice: 'User was successfully updated.' }

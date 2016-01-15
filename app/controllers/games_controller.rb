@@ -23,7 +23,7 @@ class GamesController < ApplicationController
 
   # GET /games/new
   def new
-    @game = Game.new
+    @game = Game.new(:number_of_winner=>PingooConfiguration.number_of_winners)
   end
 
   # GET /games/1/edit

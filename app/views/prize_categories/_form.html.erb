@@ -38,6 +38,13 @@
     <%=f.error_span(:icon) %>
   </div>
 
+    <div class="form-group">
+      <%= f.label 'Countries', :class => 'control-label col-lg-2' %>
+      <div class="col-lg-10">
+        <%= select_tag 'countries_ids[]' ,options_for_countries(@prize_category.country_ids),:multiple=>'multiple', :class => 'form-control chosen-select' %>
+      </div>
+    </div>
+
   <div class="form-group">
       <%=label_tag "",'',:class=>"control-label col-lg-2"%>
       <div class="col-lg-10">

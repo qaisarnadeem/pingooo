@@ -1,0 +1,33 @@
+<%- model_class = PingooConfiguration -%>
+<div class="page-header">
+  <h1><%=t '.title', :default =>'Configurations' %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:value) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @pingoo_configurations.each do |pingoo_configuration| %>
+      <tr>
+        <td><%= pingoo_configuration.id%></td>
+        <td><%= pingoo_configuration.configuration_id %></td>
+        <td><%= pingoo_configuration.value %></td>
+        <td><%=l pingoo_configuration.created_at %></td>
+        <td>
+          <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_pingoo_configuration_path(pingoo_configuration), :class => 'btn btn-default btn-xs' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_pingoo_configuration_path,
+            :class => 'btn btn-primary' %>
