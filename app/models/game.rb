@@ -1,15 +1,26 @@
 class Game < ActiveRecord::Base
-  validates_presence_of :position_x,:position_y,:position_offset,:status
+  validates_presence_of :position_x,:position_y,:status
   STATUS={1=>"Upcoming",2=>"Played",3=>"On Going"}
-  validates :position_x,:position_y,:position_offset,:number_of_winner, :numericality => { :greater_than => 0}
+  UP_COMING=1
+  PLAYED=2
+  ON_GOING=3
+  validates :position_x,:position_y,:number_of_winner, :numericality => { :greater_than => 0}
   has_many :gameplays
   has_many :prize_redemptions
   has_many :users ,:through => :gameplays
   has_one :game_picture
   MAXIMUM_TURNS_ALLOWED=4
-  scope :on_going ,->{where(:status => 3)}
+  scope :on_going ,->{where(:status => ON_GOING)}
+  scope :up_coming ,->{where(:status => UP_COMING)}
   after_save :set_picture
+  before_validation :set_status
   before_save :set_winners_count
+
+
+  def set_status
+    self.status=UP_COMING unless self.status
+  end
+
   def winner_gameplays
      played? ? self.gameplays.order(:daviation).order(:created_at).limit(self.number_of_winner) : Gameplay.none
   end
@@ -20,6 +31,14 @@ class Game < ActiveRecord::Base
 
   def played?
     status==2
+  end
+
+  def self.get_today_game
+    self.on_going.last
+  end
+
+  def self.get_next_game
+    self.up_coming.sample(1).first
   end
 
   def ongoing?
