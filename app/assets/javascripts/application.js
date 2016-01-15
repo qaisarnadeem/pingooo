@@ -17,4 +17,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require chosen/chosen.jquery.min
+//= require wice_grid
 //= require_tree .

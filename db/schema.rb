@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160115121608) do
+ActiveRecord::Schema.define(version: 20160115140004) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -174,6 +174,18 @@ ActiveRecord::Schema.define(version: 20160115121608) do
 
   add_index "users", ["country_id"], name: "index_users_on_country_id", using: :btree
 
+  create_table "winners", force: :cascade do |t|
+    t.integer  "gameplay_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "game_id"
+    t.integer  "user_id"
+  end
+
+  add_index "winners", ["game_id"], name: "index_winners_on_game_id", using: :btree
+  add_index "winners", ["gameplay_id"], name: "index_winners_on_gameplay_id", using: :btree
+  add_index "winners", ["user_id"], name: "index_winners_on_user_id", using: :btree
+
   add_foreign_key "country_specific_prizes", "countries"
   add_foreign_key "country_specific_prizes", "prize_categories"
   add_foreign_key "game_pictures", "games"
@@ -187,4 +199,7 @@ ActiveRecord::Schema.define(version: 20160115121608) do
   add_foreign_key "prizes_countries", "prize_categories"
   add_foreign_key "suggestions", "users"
   add_foreign_key "users", "countries"
+  add_foreign_key "winners", "gameplays"
+  add_foreign_key "winners", "games"
+  add_foreign_key "winners", "users"
 end

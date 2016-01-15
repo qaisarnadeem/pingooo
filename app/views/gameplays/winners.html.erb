@@ -1,0 +1,34 @@
+<%= grid(@winners) do |g|
+
+  g.column :name=>"ID"  do |task|
+    task.id
+  end
+
+  g.column :name=>"Game" ,:attribute=>'title',:assoc=>:game , custom_filter: :auto ,auto_reload: true  do |task|
+    task.game.title
+  end
+
+  g.column :name=>"User ID" ,:attribute=>'id' ,:assoc=>:user do |task|
+    task.user.id
+  end
+  g.column :name=>"User Email" ,:attribute=>'email' ,:assoc=>:user do |task|
+    task.user.email
+  end
+
+  g.column :name=>"Postion X" ,:attribute=>'position_x',:assoc=>:gameplay  do |task|
+    task.gameplay.position_x
+  end
+
+  g.column :name=>"Postion Y" ,:attribute=>'position_y',:assoc=>:gameplay  do |task|
+    task.gameplay.position_y
+  end
+
+  g.column :name=>"Chance Number" ,:attribute=>'chance_number',:assoc=>:gameplay , custom_filter: :auto, auto_reload: true  do |task|
+    task.gameplay.chance_number
+  end
+
+  g.column :name=>"Daviation" ,:attribute=>'daviation',:assoc=>:gameplay ,:filter_type=>:range  do |task|
+    task.gameplay.daviation
+  end
+
+end -%>

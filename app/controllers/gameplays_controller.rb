@@ -9,6 +9,10 @@ class GameplaysController < ApplicationController
     @gameplays = Gameplay.all
   end
 
+  def winners
+    @winners=initialize_grid(Winner.joins(:gameplay=>[:user]).select('users.* , gameplays.* , winners.* , users.email as email'))
+  end
+
   # GET /gameplays/1
   # GET /gameplays/1.json
   def show

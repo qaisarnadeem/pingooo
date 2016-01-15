@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get 'main/get_all_countries'
   get 'main/get_prize_categories'
   get "game_pictures/:attachment/:id/:style/:filename" => "games#get_pictures"
+  get "gameplays/winners"=>"gameplays#winners" ,:as=>'winners'
   resources :users ,:only=>[:create,:update]
   resources :suggestions
   resources :prize_redemptions
