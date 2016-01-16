@@ -5,7 +5,7 @@
   # end
 
   g.column :name=>"Game ID" ,:attribute=>'title',:assoc=>:game , custom_filter: :auto ,auto_reload: true  do |task|
-    task.game.title
+    task.game.id
   end
 
   g.column :name=>"Nickname" ,:attribute=>'id' ,:assoc=>:user do |task|

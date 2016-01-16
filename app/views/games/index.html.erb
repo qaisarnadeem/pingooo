@@ -18,6 +18,10 @@ g.column :name=>"Status" , :attribute=>'status' ,:custom_filter=>Game::STATUS.in
 
 
 
+  g.column :name=>"Played On" ,:attribute=>'played_on' do |task|
+    task.played_on
+  end
+
   g.column :name=>"Created At" ,:attribute=>'created_at' do |task|
     task.created_at
   end
@@ -30,7 +34,3 @@ g.column :name=>"Status" , :attribute=>'status' ,:custom_filter=>Game::STATUS.in
     end
 
     %>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_game_path,
-            :class => 'btn btn-primary' %>

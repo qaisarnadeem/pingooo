@@ -21,10 +21,10 @@ class Game < ActiveRecord::Base
   MAXIMUM_TURNS_ALLOWED=4
   scope :on_going ,->{where(:status => ON_GOING)}
   scope :up_coming ,->{where(:status => UP_COMING)}
-  after_save :set_picture
+  #after_save :set_picture
   before_validation :set_status
   before_save :set_winners_count
-
+  has_many :winners
 
   def set_status
     self.status=UP_COMING unless self.status
@@ -52,7 +52,7 @@ end
   end
 
   def self.get_next_game
-    self.up_coming.sample(1).first
+    self.up_coming.where(:is_active=>true).sample(1).first
   end
 
   def ongoing?

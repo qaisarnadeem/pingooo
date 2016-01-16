@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160116202513) do
+ActiveRecord::Schema.define(version: 20160116215917) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -103,6 +103,7 @@ ActiveRecord::Schema.define(version: 20160116202513) do
     t.integer  "competition_picture_file_size"
     t.datetime "competition_picture_updated_at"
     t.boolean  "is_active",                        default: true
+    t.datetime "played_on"
   end
 
   create_table "pingoo_configurations", force: :cascade do |t|

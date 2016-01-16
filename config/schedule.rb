@@ -18,7 +18,7 @@
 # end
 
 # Learn more: http://github.com/javan/whenever
-every 1.day, :at => Time.zone.parse('12:00 am').localtime do
+every 1.day, :at => Time.zone.parse('1:00 pm').localtime do
   runner "MyModel.task_to_run_at_four_thirty_in_the_morning"
   rake
 
