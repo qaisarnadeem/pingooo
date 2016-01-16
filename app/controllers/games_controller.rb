@@ -7,7 +7,7 @@ class GamesController < ApplicationController
   # GET /games
   # GET /games.json
   def index
-    @games = Game.all
+    @games = initialize_grid(Game)
   end
 
   def today_game
@@ -17,7 +17,7 @@ class GamesController < ApplicationController
 
 
   def get_pictures
-    picture= params[:attachment] =~ /competition_pictures/i  ? @game_picture.competition_picture : @game_picture.picture
+    picture= params[:attachment] =~ /competition_pictures/i  ? @game.competition_picture : @game.picture
     send_file picture.path, :type => picture.content_type
   end
 
@@ -37,7 +37,7 @@ class GamesController < ApplicationController
 
     respond_to do |format|
       if @game.save
-        format.html { redirect_to games_path, notice: 'Game was successfully created.' }
+        format.html { redirect_to game_pictures_path, notice: 'Game was successfully created.' }
       else
         format.html { render :new }
       end
@@ -49,7 +49,7 @@ class GamesController < ApplicationController
   def update
     respond_to do |format|
       if @game.update(game_params)
-        format.html { redirect_to games_path, notice: 'Game was successfully updated.' }
+        format.html { redirect_to game_pictures_path, notice: 'Game was successfully updated.' }
       else
         format.html { render :edit }
       end
@@ -74,7 +74,7 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.require(:game).permit(:title, :position_x, :position_y, :position_offset, :number_of_winner, :status,:picture,:competition_picture)
+      params.require(:game).permit(:title, :position_x, :position_y, :number_of_winner,:picture,:competition_picture,:is_active)
     end
 
     def authorize_pictures
@@ -85,8 +85,7 @@ class GamesController < ApplicationController
     end
 
   def set_game_from_game_picture
-      @game_picture=GamePicture.find(params[:id])
-      @game=@game_picture.game
+      @game=Game.find(params[:id])
   end
 
 end

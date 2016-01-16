@@ -8,13 +8,13 @@
     </div>
   <% end %>
 
-  <div class="form-group">
+<!--   <div class="form-group">
     <%= f.label :title, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :title, :class => 'form-control' %>
     </div>
     <%=f.error_span(:title) %>
-  </div>
+  </div> -->
   <div class="form-group">
     <%= f.label :position_x, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
@@ -29,6 +29,14 @@
     </div>
     <%=f.error_span(:position_y) %>
   </div>
+
+    <div class="form-group">
+    <%= f.label :is_active, :class => 'control-label col-lg-2' %>
+      <div class="col-lg-10">
+        <%= f.check_box :is_active,:class=>'form-control'%>
+      </div>
+    </div>
+
   <!--<div class="form-group">-->
     <!--<%= f.label :position_offset, :class => 'control-label col-lg-2' %>-->
     <!--<div class="col-lg-10">-->
@@ -36,15 +44,21 @@
     <!--</div>-->
     <!--<%=f.error_span(:position_offset) %>-->
   <!--</div>-->
-  <div class="form-group">
+<!--   <div class="form-group">
     <%= f.label :number_of_winner, :class => 'control-label col-lg-2 disabled' %>
     <div class="col-lg-10">
       <%= f.text_field :number_of_winner, :class => 'form-control',:disabled=>'disabled'%>
     </div>
     <%=f.error_span(:number_of_winner) %>
+  </div> -->
+
+  <div class="form-group">
+    <%= f.label :picture, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.file_field :picture, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:picture) %>
   </div>
-
-
     <div class="form-group">
       <%=label_tag "Image 1",'',:class=>"control-label col-lg-2"%>
       <div class="col-lg-10">
@@ -52,26 +66,32 @@
       </div>
     </div>
 
-
+  <div class="form-group">
+    <%= f.label :competition_picture, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.file_field :competition_picture, :class => 'form-control' %>
+    </div>
+    <%=f.error_span(:competition_picture) %>
+  </div>
     <div class="form-group">
       <%=label_tag "Image 2",'',:class=>"control-label col-lg-2"%>
       <div class="col-lg-10">
         <%= image_tag @game.competition_picture.url,:style => "max-height:300px;"%>
       </div>
     </div>
-  <div class="form-group">
+<!--   <div class="form-group">
     <%= f.label :status, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.select :status,options_for_select(Game::STATUS.invert.to_a,@game.status) ,{}, :class => 'form-control',:disabled=>'' %>
     </div>
     <%=f.error_span(:status) %>
-  </div>
+  </div> -->
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                games_path, :class => 'btn btn-default' %>
+                game_pictures_path, :class => 'btn btn-default' %>
     </div>
   </div>
 

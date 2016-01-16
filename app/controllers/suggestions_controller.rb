@@ -5,7 +5,7 @@ class SuggestionsController < ApplicationController
   # GET /suggestions
   # GET /suggestions.json
   def index
-    @suggestions = Suggestion.all
+    @suggestions = initialize_grid(Suggestion)
   end
 
 

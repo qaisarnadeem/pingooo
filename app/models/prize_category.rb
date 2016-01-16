@@ -8,6 +8,8 @@ class PrizeCategory < ActiveRecord::Base
   after_save :set_country_specific_prizes
   has_many :prizes_countries
   has_many :countries,:through => :prizes_countries
+ 
+  CURRENCY_UNITS=["USD","PKR","SAR"]
 
   def set_country_specific_prizes
     country_specific_prizes.update_all(:amount=>self.amount)

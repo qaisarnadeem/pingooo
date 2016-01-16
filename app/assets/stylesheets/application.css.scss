@@ -1,9 +1,3 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import "chosen/chosen.css";
-@import "wice_grid";
-@import "font-awesome-sprockets";
-@import "font-awesome";
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -16,11 +10,21 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require jquery-ui.min
+ *= require chosen/chosen
  *= require_tree .
+ *= require wice_grid
  *= require_self
  */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
 .control-label.disabled{
   color:#716868;
 }
 
-
+.field_with_errors {
+padding: 0 !important;
+display: block !important;
+}

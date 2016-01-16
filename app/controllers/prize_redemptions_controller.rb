@@ -5,7 +5,7 @@ class PrizeRedemptionsController < ApplicationController
   # GET /prize_redemptions
   # GET /prize_redemptions.json
   def index
-    @prize_redemptions = PrizeRedemption.all
+    @prize_redemptions = initialize_grid(PrizeRedemption,:include=>[{:user=>:country},:prize_category])
   end
 
   # GET /prize_redemptions/1

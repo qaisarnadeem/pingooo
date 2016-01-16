@@ -1,49 +1,55 @@
-<%- model_class = User -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <div class="page-header">
+  <h1><%=t '.title', :default => 'Users' %></h1>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:nickname) %></th>
-      <th><%= model_class.human_attribute_name(:email) %></th>
-      <th><%= model_class.human_attribute_name(:first_name) %></th>
-      <th><%= model_class.human_attribute_name(:last_name) %></th>
-      <th><%= model_class.human_attribute_name(:country_id) %></th>
-      <th><%= model_class.human_attribute_name(:date_of_birth) %></th>
-      <th><%= model_class.human_attribute_name(:language) %></th>
-      <th><%= model_class.human_attribute_name(:secret_code) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= link_to user.id, user_path(user) %></td>
-        <td><%= user.nickname %></td>
-        <td><%= user.email %></td>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= user.country.try(:name) %></td>
-        <td><%= user.date_of_birth %></td>
-        <td><%= user.language %></td>
-        <td><%= user.secret_code %></td>
-        <td><%=l user.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_user_path(user), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      user_path(user),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+
+<%= grid(@users) do |g|
+
+   g.column :name=>"ID"  do |task|
+     task.id
+   end
+
+ g.column :name=>"Country" ,:attribute=>'name' , :assoc=>:country do |task|
+    task.country.try(:name)
+  end 
+
+ g.column :name=>"Nickname" ,:attribute=>'nickname' do |task|
+    task.nickname
+  end 
+
+
+  g.column :name=>"Email" ,:attribute=>'email' do |task|
+    task.email
+  end
+
+ g.column :name=>"First Name" ,:attribute=>'first_name' do |task|
+    task.first_name
+  end
+
+
+ g.column :name=>"Last Name" ,:attribute=>'last_name' do |task|
+    task.last_name
+  end
+
+ g.column :name=>"Date Of Birth" ,:attribute=>'date_of_birth' do |task|
+    task.date_of_birth
+  end
+
+ g.column :name=>"Created At" ,:attribute=>'created_at' do |task|
+    task.created_at
+  end
+g.column :name=>"Actions" ,:filter=>false do |task|
+    raw"#{link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_user_path(task), :class => 'btn btn-default btn-xs'} #{
+  link_to t('.destroy', :default => t("helpers.links.destroy")),
+  user_path(task),
+  :method => :delete,
+  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+  :class => 'btn btn-xs btn-danger'}" 
+  end
+
+end -%>
+
+
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_user_path,

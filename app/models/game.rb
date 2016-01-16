@@ -1,5 +1,14 @@
 class Game < ActiveRecord::Base
-  validates_presence_of :position_x,:position_y,:status
+
+  has_attached_file :picture, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/assets/:style/missing.png",:path =>
+      ":rails_root/private/system/:class/:attachment/:id/:style/:filename",
+                    :url => '/:class/:attachment/:id/:style/:filename'
+  has_attached_file :competition_picture, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/assets/:style/missing.png",:path =>
+      ":rails_root/private/system/:class/:attachment/:id/:style/:filename",
+                    :url => '/:class/:attachment/:id/:style/:filename'
+  validates_attachment_content_type :picture,:competition_picture, content_type: /\Aimage\/.*\Z/
+ 
+  validates_presence_of :position_x,:position_y,:status,:picture,:competition_picture
   STATUS={1=>"Upcoming",2=>"Played",3=>"On Going"}
   UP_COMING=1
   PLAYED=2
@@ -19,6 +28,7 @@ class Game < ActiveRecord::Base
 
   def set_status
     self.status=UP_COMING unless self.status
+    self.number_of_winner=PingooConfiguration.number_of_winners if number_of_winner.to_i.zero?
   end
 
   def winner_gameplays
@@ -33,6 +43,10 @@ class Game < ActiveRecord::Base
     status==2
   end
 
+def is_used?
+ played? || ongoing?
+end
+
   def self.get_today_game
     self.on_going.last
   end
@@ -45,9 +59,9 @@ class Game < ActiveRecord::Base
     status==3
   end
 
-  def picture
-    game_picture.try(:picture) || GamePicture.new.picture
-  end
+  # def picture
+  #   game_picture.try(:picture) || GamePicture.new.picture
+  # end
 
   def set_picture
    if !upcoming? && game_picture.nil?
@@ -59,9 +73,9 @@ class Game < ActiveRecord::Base
   end
 
 
-  def competition_picture
-    game_picture.try(:competition_picture) || GamePicture.new.competition_picture
-  end
+  # def competition_picture
+  #   game_picture.try(:competition_picture) || GamePicture.new.competition_picture
+  # end
 
   def set_winners_count
     self.number_of_winner=PingooConfiguration.number_of_winners if self.number_of_winner.to_i <=0 && PingooConfiguration.number_of_winners > 0

@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users = initialize_grid(User,:include=>[:country])
   end
 
   # GET /users/1
@@ -26,13 +26,14 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new({:nickname=>params[:nickname]})
+    @user=User.new(user_params) unless  request_json?      
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to users_path, notice: 'User was successfully created.' }
         format.json { render json: {:message=>"User was successfully  created",:responce=>"SUCCESS",:secret_code=>@user.secret_code}, status: :unprocessable_entity,:responce=>"ERROR" }
       else
         format.html { render :new }
-        format.json { render json: {:message=>"User could not be created",:responce=>"ERROR"}, status: :unprocessable_entity,:responce=>"ERROR" }
+        format.json { render json: {:message=>@user.errors,:responce=>"ERROR"}, status: :unprocessable_entity,:responce=>"ERROR" }
       end
     end
   end

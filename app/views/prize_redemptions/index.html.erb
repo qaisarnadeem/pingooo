@@ -1,45 +1,62 @@
-<%- model_class = PrizeRedemption -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <div class="page-header">
+  <h1><%=t '.title', :default => 'Prize Redemptions' %></h1>
 </div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:user_id) %></th>
-      <th><%= model_class.human_attribute_name(:user_country) %></th>
-      <th><%= model_class.human_attribute_name(:game_id) %></th>
-      <th><%= model_class.human_attribute_name(:prize_category_type) %></th>
-      <th><%= model_class.human_attribute_name(:category_prize) %></th>
-      <th><%= model_class.human_attribute_name(:status) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @prize_redemptions.each do |prize_redemption| %>
-      <tr>
-        <td><%= prize_redemption.id %></td>
-        <td><%= prize_redemption.user.email || user.id %></td>
-        <td><%= prize_redemption.user.country.try(:name) || Country::ALL_COUNTRY %></td>
-        <td><%= prize_redemption.game.title %></td>
-        <td><%= prize_redemption.prize_category.title %></td>
-        <td><%= prize_redemption.prize_category.amount %></td>
-        <td><%= PrizeRedemption::STATUS[prize_redemption.status] %></td>
-        <td><%=l prize_redemption.created_at %></td>
-        <td>
-          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                      edit_prize_redemption_path(prize_redemption), :class => 'btn btn-default btn-xs' %>
-          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                      prize_redemption_path(prize_redemption),
-                      :method => :delete,
-                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                      :class => 'btn btn-xs btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= grid(@prize_redemptions) do |g|
+
+  g.column :name=>"ID" ,:attribute=>'id' do |task|
+    task.id
+  end
+
+  g.column :name=>"Country" ,:attribute=>'name' ,:assoc=>[:user,:country] do |task|
+    task.user.country.try(:name) || Country::ALL_COUNTRY
+  end
+g.column :name=>"Nickname" ,:attribute=>'nickname' ,:assoc=>[:user] do |task|
+    task.user.nickname
+  end
+
+g.column :name=>"Email" ,:attribute=>'email' ,:assoc=>[:user] do |task|
+    task.user.email
+  end
+
+g.column :name=>"Competition ID" ,:attribute=>'game_id'  do |task|
+    task.game_id
+  end
+
+g.column :name=>"Prize Category" ,:attribute=>'title'  ,:assoc=> :prize_category do |task|
+  task.game_category.title
+end
+
+
+  g.column :name=>"Prize Amount" ,:attribute=>'currency_unit',:assoc=> :prize_category  do |task|
+    task.game_category.amount
+  end
+
+  g.column :name=>"Currency Unit" ,:attribute=>'currency_unit' ,:assoc=> :prize_category do |task|
+    task.prize_category.currency_unit
+  end
+
+
+
+g.column :name=>"Status" ,:attribute=>'status',:custom_filter=> PrizeRedemption::STATUS.invert.to_a ,:auto_reload=>true do |task|
+  PrizeRedemption::STATUS[prize_redemption.status]
+end
+
+g.column :name=>"Created At" ,:attribute=>'created_at' do |task|
+    task.created_at
+  end
+
+g.column :name=>"Actions" ,:filter=>false do |task|
+    raw"#{link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_prize_redemption_path(task), :class => 'btn btn-default btn-xs'} #{
+  link_to t('.destroy', :default => t("helpers.links.destroy")),
+  prize_redemption_path(task),
+  :method => :delete,
+  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+  :class => 'btn btn-xs btn-danger'}" 
+  end
+
+    end
+    %>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_prize_redemption_path,

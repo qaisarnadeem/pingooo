@@ -4,7 +4,7 @@ class PrizeCategoriesController < ApplicationController
   # GET /prize_categories
   # GET /prize_categories.json
   def index
-    @prize_categories = PrizeCategory.all
+    @prize_categories = initialize_grid(PrizeCategory)
   end
 
   # GET /prize_categories/new
@@ -67,6 +67,6 @@ class PrizeCategoriesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def prize_category_params
-      params.require(:prize_category).permit(:title, :description, :amount,:icon)
+      params.require(:prize_category).permit(:title, :description, :amount,:icon,:currency_unit)
     end
 end

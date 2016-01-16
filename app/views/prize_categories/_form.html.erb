@@ -37,7 +37,13 @@
     </div>
     <%=f.error_span(:icon) %>
   </div>
-
+<div class="form-group">
+    <%= f.label :currency_unit, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :currency_unit,options_for_currency_units(@prize_category.currency_unit),{:prompt=>"Choose Currency Unit"} ,:class => 'form-control' %>
+    </div>
+    <%=f.error_span(:icon) %>
+  </div>
     <div class="form-group">
       <%= f.label 'Countries', :class => 'control-label col-lg-2' %>
       <div class="col-lg-10">

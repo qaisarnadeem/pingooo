@@ -5,7 +5,7 @@ class GamePicturesController < ApplicationController
   # GET /game_pictures
   # GET /game_pictures.json
   def index
-    @game_pictures = GamePicture.order(:id)
+    @game_pictures = initialize_grid(Game)
   end
 
 

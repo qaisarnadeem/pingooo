@@ -19,6 +19,11 @@ module ApplicationHelper
     options_for_select(Game.all.map {|game| [game.title,game.id]},selected_game)
   end
 
+
+  def options_for_currency_units selected
+      options_for_select(PrizeCategory::CURRENCY_UNITS,selected)
+  end
+
   def options_for_users selected_user
     options_for_select(User.select(:email,:id).where("email is not null and email <>'' ").order(:email).map{|u| [u.email,u.id]},selected_user)
   end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160115140004) do
+ActiveRecord::Schema.define(version: 20160116202513) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -92,8 +92,8 @@ ActiveRecord::Schema.define(version: 20160115140004) do
     t.integer  "position_offset"
     t.integer  "number_of_winner",                 default: 0
     t.integer  "status"
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.datetime "created_at",                                      null: false
+    t.datetime "updated_at",                                      null: false
     t.string   "picture_file_name"
     t.string   "picture_content_type"
     t.integer  "picture_file_size"
@@ -102,6 +102,7 @@ ActiveRecord::Schema.define(version: 20160115140004) do
     t.string   "competition_picture_content_type"
     t.integer  "competition_picture_file_size"
     t.datetime "competition_picture_updated_at"
+    t.boolean  "is_active",                        default: true
   end
 
   create_table "pingoo_configurations", force: :cascade do |t|
@@ -121,6 +122,7 @@ ActiveRecord::Schema.define(version: 20160115140004) do
     t.string   "icon_content_type"
     t.integer  "icon_file_size"
     t.datetime "icon_updated_at"
+    t.string   "currency_unit"
   end
 
   create_table "prize_redemptions", force: :cascade do |t|
