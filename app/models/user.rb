@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :email,:allow_blank => true
   def set_secret_code
     if self.secret_code.blank?
-      self.secret_code=Digest::MD5.hexdigest(self.id.to_s)
+      self.secret_code=Digest::MD5.hexdigest(self.id.to_s+Time.now.to_i.to_s)
       self.save
     end
   end
