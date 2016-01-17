@@ -19,4 +19,6 @@
 //= require chosen/chosen.jquery.min
 //= require wice_grid
 //= require jquery-ui.min 
+//= require nprogress
+//= require nprogress-turbolinks
 //= require_tree .
