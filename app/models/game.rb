@@ -21,10 +21,13 @@ class Game < ActiveRecord::Base
   MAXIMUM_TURNS_ALLOWED=4
   scope :on_going ,->{where(:status => ON_GOING)}
   scope :up_coming ,->{where(:status => UP_COMING)}
+  scope :played ,->{where(:status => PLAYED)}
+  
+  
   #after_save :set_picture
   before_validation :set_status
   before_save :set_winners_count
-  has_many :winners
+  has_many :winners,->{order('daviation')}
 
   def set_status
     self.status=UP_COMING unless self.status
@@ -32,7 +35,11 @@ class Game < ActiveRecord::Base
   end
 
   def winner_gameplays
-     played? ? self.gameplays.order(:daviation).order(:created_at).limit(self.number_of_winner) : Gameplay.none
+    return Gameplay.none unless played?
+     gameplays_data= self.gameplays.select('user_id,min(daviation) as daviation').group(:user_id).order('daviation').limit(self.number_of_winner)
+     ids=[]
+     gameplays_data.each{|gp| ids<<self.gameplays.where(:user_id=>gp.user_id).order(:daviation).first.try(:id)}
+     self.gameplays.where(:id=>ids.compact)
   end
 
   def upcoming?
@@ -58,6 +65,10 @@ end
   def ongoing?
     status==3
   end
+
+  def self.last_played
+      self.played.order(:played_on).last
+   end
 
   # def picture
   #   game_picture.try(:picture) || GamePicture.new.picture

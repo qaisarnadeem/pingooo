@@ -8,7 +8,7 @@ namespace :winner_announcement do
       if game
         game.update_attributes :status=> Game::PLAYED
         game.winner_gameplays.each do |game_play|
-          Winner.create(:gameplay=>game_play)
+          Winner.create(:gameplay_id=>game_play.id)
         end
       end
       next_competition=Game.get_next_game

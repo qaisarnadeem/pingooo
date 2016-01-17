@@ -13,10 +13,11 @@ class GameplaysController < ApplicationController
     @winners=initialize_grid(Winner.joins(:gameplay=>[:user]).select('users.* , gameplays.* , winners.* , users.email as email')) unless request_json?
     if request_json?
        game=Game.find_by_id(params[:game_id])
+       game=Game.last_played unless game
        render :json=>{:message=>"We could not find any game with provided id",:responce=>"ERROR"} and return unless  game
        render :json=>{:message=>"This Game is not played yet",:responce=>"ERROR"} and return unless  game.played?  
        winners=game.winners.includes(:user)
-       render :json=>{:total_count=>winners.length,:winners=>winners.map{|w| {:game_id=>w.game_id,:chance_number=>w.gameplay.chance_number,:user=>{:id=>w.user_id,:email=>w.user.email,:nickname=>w.user.nickname,:country=>w.user.country.try(:ame),:first_name=>w.user.first_name,:last_name=>w.user.last_name},:distance_from_ball=>w.gameplay.daviation}}} and return
+       render :json=>{:total_count=>winners.length,:winners=>winners.map{|w| {:game_id=>w.game_id,:chance_number=>w.gameplay.chance_number,:user=>{:id=>w.user_id,:email=>w.user.email,:nickname=>w.user.nickname,:country=>w.user.country.try(:ame),:first_name=>w.user.first_name,:last_name=>w.user.last_name},:distance_from_ball=>w.gameplay.daviation,:played_at=>w.gameplay.created_at}}} and return
        end
   end
 
