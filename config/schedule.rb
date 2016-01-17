@@ -16,10 +16,9 @@
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"
 # end
-
+require 'active_support/all'
+Time.zone='London'
 # Learn more: http://github.com/javan/whenever
 every 1.day, :at => Time.zone.parse('1:00 pm').localtime do
-  runner "MyModel.task_to_run_at_four_thirty_in_the_morning"
-  rake
-
+  rake "winner_announcement:announce_winner"
 end

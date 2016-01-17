@@ -81,5 +81,7 @@ test:
 production:
   <<: *default
   database: pingooo_production
+  host: localhost
   username: pingooo
-  password: <%= ENV['PINGOOO_DATABASE_PASSWORD'] %>
+  password: pingooo
+#<%= ENV['PINGOOO_DATABASE_PASSWORD'] %>

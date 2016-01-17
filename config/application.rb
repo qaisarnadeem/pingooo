@@ -25,5 +25,6 @@ module Pingooo
     config.time_zone = 'London'
     config.serve_static_files = true
     config.assets.serve_static_files = true
+    
   end
 end
