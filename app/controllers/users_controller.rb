@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :destroy]
+  before_action :set_user, only: [:edit, :destroy]
   skip_before_action :verify_authenticity_token
   before_filter :authorize_apps_request ,:except => [:create]
   # GET /users
@@ -11,11 +11,19 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
+    @user=User.find_by_id(params[:id])
+    @user=current_app_user @unless @user
+    @user=User.find_by_secret_code(params[:id]) unless @user
   end
 
   # GET /users/new
   def new
     @user = User.new
+  end
+
+  def add_diamond_count
+    render_404 and return unless  request_json
+    @user= current_app_user
   end
 
   # GET /users/1/edit
