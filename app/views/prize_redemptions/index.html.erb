@@ -23,12 +23,12 @@ g.column :name=>"Competition ID" ,:attribute=>'game_id'  do |task|
   end
 
 g.column :name=>"Prize Category" ,:attribute=>'title'  ,:assoc=> :prize_category do |task|
-  task.game_category.title
+  task.prize_category.title
 end
 
 
   g.column :name=>"Prize Amount" ,:attribute=>'currency_unit',:assoc=> :prize_category  do |task|
-    task.game_category.amount
+    task.prize_category.amount
   end
 
   g.column :name=>"Currency Unit" ,:attribute=>'currency_unit' ,:assoc=> :prize_category do |task|
@@ -38,7 +38,7 @@ end
 
 
 g.column :name=>"Status" ,:attribute=>'status',:custom_filter=> PrizeRedemption::STATUS.invert.to_a ,:auto_reload=>true do |task|
-  PrizeRedemption::STATUS[prize_redemption.status]
+  PrizeRedemption::STATUS[task.status]
 end
 
 g.column :name=>"Created At" ,:attribute=>'created_at' do |task|
@@ -57,7 +57,3 @@ g.column :name=>"Actions" ,:filter=>false do |task|
 
     end
     %>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_prize_redemption_path,
-            :class => 'btn btn-primary' %>

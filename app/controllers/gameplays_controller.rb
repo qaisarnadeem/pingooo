@@ -6,7 +6,7 @@ class GameplaysController < ApplicationController
   # GET /gameplays
   # GET /gameplays.json
   def index
-    @gameplays = Gameplay.all
+    @gameplays = initialize_grid(Gameplay,:include=>[:user])
   end
 
   def winners
@@ -53,11 +53,9 @@ class GameplaysController < ApplicationController
   def update
     respond_to do |format|
       if @gameplay.update(gameplay_params)
-        format.html { redirect_to @gameplay, notice: 'Gameplay was successfully updated.' }
-        format.json { render :show, status: :ok, location: @gameplay }
+        format.html { redirect_to gameplays_path, notice: 'Gameplay was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @gameplay.errors, status: :unprocessable_entity }
       end
     end
   end

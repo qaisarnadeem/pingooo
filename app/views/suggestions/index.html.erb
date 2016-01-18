@@ -10,13 +10,13 @@
 
 
  g.column :name=>"Nickname" ,:attribute=>'nickname' ,:assoc=>:user do |task|
-    task.user.nickname
+    task.user.try(:nickname)
   end 
 
 
 
  g.column :name=>"Email" ,:attribute=>'email' ,:assoc=>:user do |task|
-    task.user.email
+    task.user.try(:email)
   
   end 
  g.column :name=>"Subject" ,:attribute=>'subject' do |task|

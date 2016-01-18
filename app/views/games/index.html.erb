@@ -12,9 +12,9 @@
     task.number_of_winner
   end
 
-g.column :name=>"Status" , :attribute=>'status' ,:custom_filter=>Game::STATUS.invert.to_a ,:auto_reload=>true  do |task|
-    Game::STATUS[task.status]
-  end
+# g.column :name=>"Status" , :attribute=>'status' ,:custom_filter=>Game::STATUS.invert.to_a ,:auto_reload=>true  do |task|
+#     Game::STATUS[task.status]
+#   end
 
 
 
