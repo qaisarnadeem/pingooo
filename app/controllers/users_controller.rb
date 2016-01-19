@@ -11,9 +11,10 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user=User.find_by_id(params[:id])
-    @user=current_app_user @unless @user
-    @user=User.find_by_secret_code(params[:id]) unless @user
+    render_404 and return unless  request_json? && current_app_user.present?
+    #@user=User.find_by_id(params[:id])
+    @user=current_app_user
+    #@user=User.find_by_secret_code(params[:id]) unless @user
   end
 
   # GET /users/new
@@ -21,9 +22,11 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def add_diamond_count
-    render_404 and return unless  request_json
-    @user= current_app_user
+  def add_diamonds
+    render_404 and return unless  request_json? &&  current_app_user
+    render :json=>{:message=>"Please specify Number of Diamonds to add",:responce=>"ERROR"} and return if params[:diamond_count].to_i <=0
+    current_app_user.increment!(:diamond_count,params[:diamond_count].to_i) 
+    render :json=>{:message=>"Diamond Successfully added",:responce=>"SUCCESS",:diamond_count=>current_app_user.diamond_count} and return
   end
 
   # GET /users/1/edit

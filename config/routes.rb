@@ -23,7 +23,11 @@ Rails.application.routes.draw do
   resources :country_specific_prizes
   resources :prize_categories
   resources :games
-  resources :users
+  resources :users do 
+   collection do 
+    post :add_diamonds
+  end
+  end
   Rails.application.routes.draw do
   resources :pingoo_configurations
   resources :game_pictures
