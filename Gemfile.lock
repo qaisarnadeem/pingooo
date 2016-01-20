@@ -104,6 +104,7 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.8.3)
     multi_json (1.11.2)
+    mysql2 (0.4.2)
     nokogiri (1.6.7.1)
       mini_portile2 (~> 2.0.0.rc2)
     nprogress-rails (0.1.6.7)
@@ -116,7 +117,6 @@ GEM
       mimemagic (= 0.3.0)
     parsley-rails (2.0.7.0)
       railties (>= 3.0.0)
-    pg (0.18.4)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -212,10 +212,10 @@ DEPENDENCIES
   font-awesome-sass (~> 4.3)
   jbuilder (~> 2.0)
   jquery-rails
+  mysql2
   nprogress-rails
   paperclip (~> 4.3)
   parsley-rails
-  pg (~> 0.15)
   rails (= 4.2.5)
   rails_12factor
   sass-rails (~> 5.0)
