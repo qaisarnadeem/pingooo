@@ -18,8 +18,19 @@
  g.column :name=>"Email" ,:attribute=>'email' ,:assoc=>:user do |task|
     task.user.try(:email)
   
-  end 
- g.column :name=>"Subject" ,:attribute=>'subject' do |task|
+  end
+
+   g.column :name=>"First Name" ,:attribute=>'first_name' ,:assoc=>:user do |task|
+     task.user.try(:first_name)
+
+   end
+
+
+   g.column :name=>"Last Email" ,:attribute=>'last_name' ,:assoc=>:user do |task|
+     task.user.try(:last_email)
+   end
+
+   g.column :name=>"Subject" ,:attribute=>'subject' do |task|
     task.subject
   end
 
