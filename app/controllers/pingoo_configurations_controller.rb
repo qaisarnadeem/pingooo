@@ -28,7 +28,7 @@ class PingooConfigurationsController < ApplicationController
         format.html { redirect_to  pingoo_configurations_url, notice: 'Pingoo configuration was successfully created.' }
       else
         format.html { render :new }
-        format.json { render json: @pingoo_configuration.errors, status: :unprocessable_entity }
+        format.json { render json: @pingoo_configuration.errors, status: :ok }
       end
     end
   end
@@ -41,7 +41,7 @@ class PingooConfigurationsController < ApplicationController
         format.html { redirect_to  pingoo_configurations_url, notice: 'Pingoo configuration was successfully updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @pingoo_configuration.errors, status: :unprocessable_entity }
+        format.json { render json: @pingoo_configuration.errors, status: :ok }
       end
     end
   end

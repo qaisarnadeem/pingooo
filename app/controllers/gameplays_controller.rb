@@ -43,7 +43,7 @@ class GameplaysController < ApplicationController
       if @gameplay.save
         format.json { render json: {:message=>"Gameplay successfully added",:responce=>"SUCCESS"}, status: :created, location: @gameplay }
       else
-        format.json { render json: {:message=>@gameplay.errors,:responce=>"ERROR"}, status: :unprocessable_entity }
+        format.json { render json: {:message=>@gameplay.errors,:responce=>"ERROR"}, status: :ok }
       end
     end
   end

@@ -44,7 +44,7 @@ class UsersController < ApplicationController
         format.json { render json: {:message=>"User was successfully  created",:responce=>"SUCCESS",:secret_code=>@user.secret_code}, status: :ok}
       else
         format.html { render :new }
-        format.json { render json: {:message=>@user.errors,:responce=>"ERROR"}, status: :unprocessable_entity,:responce=>"ERROR" }
+        format.json { render json: {:message=>@user.errors,:responce=>"ERROR"}, status: :ok,:responce=>"ERROR" }
       end
     end
   end
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
         format.json { render :json=>{:message=>"User updated successfully",:responce=>"SUCCESS"}, status: :ok}
       else
         format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        format.json { render json: @user.errors, status: :ok }
       end
     end
   end

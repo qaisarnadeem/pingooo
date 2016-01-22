@@ -33,7 +33,7 @@ class PrizeRedemptionsController < ApplicationController
         format.json { render :json=>{:message=>"Prize redemption was successfully created.",:responce=>"SUCCESS"}, status: :created, location: @prize_redemption }
       else
         format.html { render :new }
-        format.json { render json: {:message=>@prize_redemption.errors,:responce=>"ERROR"}, status: :unprocessable_entity }
+        format.json { render json: {:message=>@prize_redemption.errors,:responce=>"ERROR"}, status: :ok }
       end
     end
   end
@@ -47,7 +47,7 @@ class PrizeRedemptionsController < ApplicationController
         format.json { render :show, status: :ok, location: @prize_redemption }
       else
         format.html { render :edit }
-        format.json { render json: @prize_redemption.errors, status: :unprocessable_entity }
+        format.json { render json: @prize_redemption.errors, status: :ok }
       end
     end
   end

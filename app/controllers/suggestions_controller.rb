@@ -22,7 +22,7 @@ class SuggestionsController < ApplicationController
         format.json { render json: {:message=>'Suggestion was successfully created.',:responce=>"SUCCESS"}, status: :created}
       else
         format.html { render :new }
-        format.json { render json: {:message=>@suggestion.errors,:responce=>"ERROR"}, status: :unprocessable_entity }
+        format.json { render json: {:message=>@suggestion.errors,:responce=>"ERROR"}, status: :ok }
       end
     end
   end

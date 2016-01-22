@@ -15,6 +15,6 @@ namespace :winner_announcement do
       next_competition.update_attributes(:status=>Game::ON_GOING,:played_on=>Time.now) if next_competition
       logger.info("ERROR:: There is no game Left To Play") unless next_competition
     end
-    logger.info("Winners Anouncment Fiished")
+    logger.info("Winners Anouncment Finished")
   end
 end
