@@ -13,7 +13,7 @@ class GameplaysController < ApplicationController
     @winners=initialize_grid(Winner.joins(:gameplay=>[:user]).select('users.* , gameplays.* , winners.* , users.email as email')) unless request_json?
     if request_json?
        game=Game.find_by_id(params[:game_id])
-       game=Game.last_played unless game
+       game=Game.last_played unless gameu
        render :json=>{:message=>"We could not find any game with provided id",:responce=>"ERROR"} and return unless  game
        render :json=>{:message=>"This Game is not played yet",:responce=>"ERROR"} and return unless  game.played?  
        winners=game.winners.includes(:user)
@@ -39,8 +39,11 @@ class GameplaysController < ApplicationController
     render :json => {:message=>"We could not find any ongoing game with provided ID",:responce=>"ERROR"} and return unless @game && @game.ongoing?
     gameplays_sofar=@game.gameplays.where(:user_id=>current_app_user.id).count
     render :json=> {:message=>"You have already exhausted all of your available chances",:responce=>"ERROR"} and return if gameplays_sofar >= Game::MAXIMUM_TURNS_ALLOWED
+    render :json=> {:message=>"Please provide the diamond cost for this chance",:responce=>"ERROR"} and return if params[:diamond_cost].blank?
+    render :json=>{:message=>"You dont have enough diamonds to play this chance",:responce=>"ERROR"} and return if  params[:diamond_cost].to_i.abs > current_app_user.diamond_count
     respond_to do |format|
       if @gameplay.save
+        current_app_user.increment!(:diamond_count, -1*params[:diamond_cost].to_i.abs)
         format.json { render json: {:message=>"Gameplay successfully added",:responce=>"SUCCESS"}, status: :created, location: @gameplay }
       else
         format.json { render json: {:message=>@gameplay.errors,:responce=>"ERROR"}, status: :ok }
