@@ -13,7 +13,7 @@ class GameplaysController < ApplicationController
     @winners=initialize_grid(Winner.joins(:gameplay=>[:user]).select('users.* , gameplays.* , winners.* , users.email as email')) unless request_json?
     if request_json?
        game=Game.find_by_id(params[:game_id])
-       game=Game.last_played unless gameu
+       game=Game.last_played unless game
        render :json=>{:message=>"We could not find any game with provided id",:responce=>"ERROR"} and return unless  game
        render :json=>{:message=>"This Game is not played yet",:responce=>"ERROR"} and return unless  game.played?  
        winners=game.winners.includes(:user)
