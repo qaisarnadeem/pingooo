@@ -27,7 +27,7 @@ class Game < ActiveRecord::Base
   #after_save :set_picture
   before_validation :set_status
   before_save :set_winners_count
-  has_many :winners,->{order('daviation')}
+  has_many :winners
 
   def set_status
     self.status=UP_COMING unless self.status
