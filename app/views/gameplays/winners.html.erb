@@ -4,7 +4,7 @@
   #   task.id
   # end
 
-  g.column :name=>"Competition ID" ,:attribute=>'title',:assoc=>:game , custom_filter: :auto ,auto_reload: true  do |task|
+  g.column :name=>"Competition ID" ,:attribute=>'id',:assoc=>:game , custom_filter: :auto ,auto_reload: true  do |task|
     task.game.id
   end
 
