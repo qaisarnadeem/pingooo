@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :pingoo_configurations ,:path => 'configurations'
   resources :game_pictures
   get 'main/get_all_countries'
+  get 'main/announce_winners'
   get 'main/get_prize_categories'
   get "games/:attachment/:id/:style/:filename" => "games#get_pictures"
   get "gameplays/winners"=>"gameplays#winners" ,:as=>'winners'

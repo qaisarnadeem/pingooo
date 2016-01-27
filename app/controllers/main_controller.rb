@@ -10,4 +10,14 @@ class MainController < ApplicationController
     render :json =>  {:total_count=>prize_categories.length, :prize_categories=>prize_categories.map{|p_c| {:name=>p_c.title,:id=>p_c.id,:icon=>{:medium=>p_c.icon.url(:medium),:original=>p_c.icon.url}}}}
   end
 
+
+
+  def announce_winners
+    require 'rake'
+    Rake::Task.clear
+    Pingooo::Application.load_tasks
+    Rake::Task['winner_announcement:announce_winner'].invoke
+    redirect_to :back , {:notice => "Winners Successfully Announced"} and return
+  end
+
 end
