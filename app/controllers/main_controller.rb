@@ -17,7 +17,8 @@ class MainController < ApplicationController
     Rake::Task.clear
     Pingooo::Application.load_tasks
     Rake::Task['winner_announcement:announce_winner'].invoke
-    redirect_to :back , {:notice => "Winners Successfully Announced"} and return
+    flash[:success]="Winners Successfully Announced. Here are the log details for this job"
+    render :file => "/log/winners.log" and return
   end
 
 end
