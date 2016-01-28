@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :users do 
    collection do 
     post :add_diamonds
+    post :watch_video
   end
   end
   Rails.application.routes.draw do

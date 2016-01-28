@@ -29,6 +29,14 @@ class UsersController < ApplicationController
     render :json=>{:message=>"Diamond Successfully added",:responce=>"SUCCESS",:diamond_count=>current_app_user.diamond_count} and return
   end
 
+  def watch_video
+    render_404 and return unless  request_json? &&  current_app_user
+    render :json=>{:message=>"Please Specify Watched At Date",:responce=>"ERROR"} and return if params[:watched_at].blank?
+    res=current_app_user.update_attributes(:last_video_watched=>params[:watched_at])
+    flash_msg=res ? "Succefully data updated" :"We could not store watched at date time"
+    render :json=>{:message=>flash_msg,:responce=>(res ? "SUCCESS" : "ERROR")}
+  end
+
   # GET /users/1/edit
   def edit
   end

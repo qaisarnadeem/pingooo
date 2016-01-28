@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160116215917) do
+ActiveRecord::Schema.define(version: 20160128085333) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -159,17 +159,18 @@ ActiveRecord::Schema.define(version: 20160116215917) do
   add_index "suggestions", ["user_id"], name: "index_suggestions_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "nickname",      limit: 255
-    t.string   "email",         limit: 255
-    t.string   "first_name",    limit: 255
-    t.string   "last_name",     limit: 255
-    t.integer  "country_id",    limit: 4
+    t.string   "nickname",           limit: 255
+    t.string   "email",              limit: 255
+    t.string   "first_name",         limit: 255
+    t.string   "last_name",          limit: 255
+    t.integer  "country_id",         limit: 4
     t.date     "date_of_birth"
-    t.integer  "diamond_count", limit: 4,   default: 1
-    t.string   "language",      limit: 255, default: "English"
-    t.string   "secret_code",   limit: 255
-    t.datetime "created_at",                                    null: false
-    t.datetime "updated_at",                                    null: false
+    t.integer  "diamond_count",      limit: 4,   default: 1
+    t.string   "language",           limit: 255, default: "English"
+    t.string   "secret_code",        limit: 255
+    t.datetime "created_at",                                         null: false
+    t.datetime "updated_at",                                         null: false
+    t.datetime "last_video_watched"
   end
 
   add_index "users", ["country_id"], name: "index_users_on_country_id", using: :btree
