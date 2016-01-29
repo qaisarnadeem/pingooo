@@ -17,7 +17,10 @@ class GameplaysController < ApplicationController
        render :json=>{:message=>"We could not find any game with provided id",:responce=>"ERROR"} and return unless  game
        render :json=>{:message=>"This Game is not played yet",:responce=>"ERROR"} and return unless  game.played?  
        winners=game.winners.includes(:user)
-       render :json=>{:total_count=>winners.length,:winners=>winners.map{|w| {:game_id=>w.game_id,:chance_number=>w.gameplay.chance_number,:user=>{:id=>w.user_id,:email=>w.user.email,:nickname=>w.user.nickname,:country=>w.user.country.try(:ame),:first_name=>w.user.first_name,:last_name=>w.user.last_name},:distance_from_ball=>w.gameplay.daviation,:played_at=>w.gameplay.created_at}}} and return
+       pictures={:original_picture=>{:original=> game.picture.url,:medium=>game.picture.url(:medium),:thumb=>game.picture.url(:thumb)},
+                 :competition_picture=>{:original=> game.competition_picture.url,:medium=>game.competition_picture.url(:medium),:thumb=>game.competition_picture.url(:thumb)}}
+       game_data={:game_id=>game.id,:number_of_winners=>game.number_of_winner,:play_started_on=>game.played_on,:pictures=>pictures}
+       render :json=>{:total_count=>winners.length,:game=>game_data,:winners=>winners.map{|w| {:game_id=>w.game_id,:chance_number=>w.gameplay.chance_number,:user=>{:id=>w.user_id,:email=>w.user.email,:nickname=>w.user.nickname,:country=>w.user.country.try(:ame),:first_name=>w.user.first_name,:last_name=>w.user.last_name},:distance_from_ball=>w.gameplay.daviation,:played_at=>w.gameplay.created_at}}} and return
        end
   end
 
