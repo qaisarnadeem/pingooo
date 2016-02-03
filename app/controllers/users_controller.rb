@@ -44,7 +44,7 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
-    @user = User.new({:nickname=>params[:nickname]})
+    @user = User.new({:nickname=>params[:nickname],:country_id=>params[:country_id]})
     @user=User.new(user_params) unless  request_json?      
     respond_to do |format|
       if @user.save
