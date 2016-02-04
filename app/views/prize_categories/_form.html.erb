@@ -58,6 +58,13 @@
       </div>
     </div>
 
+    <div class="form-group">
+      <%=label_tag "Is Active",'',:class=>"control-label col-lg-2"%>
+      <div class="col-lg-10">
+        <%= f.check_box :is_active%>
+      </div>
+    </div>
+
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
       <%= f.submit nil, :class => 'btn btn-primary' %>

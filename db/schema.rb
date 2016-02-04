@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128085333) do
+ActiveRecord::Schema.define(version: 20160204140406) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -114,13 +114,14 @@ ActiveRecord::Schema.define(version: 20160128085333) do
     t.string   "title",             limit: 255
     t.string   "description",       limit: 255
     t.integer  "amount",            limit: 4
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
     t.string   "icon_file_name",    limit: 255
     t.string   "icon_content_type", limit: 255
     t.integer  "icon_file_size",    limit: 4
     t.datetime "icon_updated_at"
     t.string   "currency_unit",     limit: 255
+    t.boolean  "is_active",                     default: true
   end
 
   create_table "prize_redemptions", force: :cascade do |t|

@@ -11,6 +11,8 @@ class PrizeCategory < ActiveRecord::Base
  
   CURRENCY_UNITS=["USD","PKR","SAR"]
 
+  scope :active ,-> {where(:is_active => true)}
+
   def set_country_specific_prizes
     country_specific_prizes.update_all(:amount=>self.amount)
   end
